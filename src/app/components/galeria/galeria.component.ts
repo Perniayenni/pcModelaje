@@ -27,7 +27,7 @@ export class GaleriaComponent  {
 
   cargarImagenesGaleria(){
     this.permiteCargar = false;
-    this._cargaImagenes.cargarDatosGaleria( this.titulo, this.descripcion, this.archivos)
+    this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
         console.log(data);
     });

@@ -8,27 +8,22 @@ import {Observable} from "rxjs";
 @Injectable()
 export class CargarImagenesService {
   private CARPETA_IMAGENES: string = 'img';
+  SentImgURl: string = 'http://localhost:8000/sendImg';
   galeriaURl: string = 'http://localhost:8000/galeria';
 
   constructor(private http: Http) { }
 
-  cargarDatosGaleria(titulo, descripcion, archivos:FileItem[]) {
+  guardarImg(titulo, descripcion, archivos:FileItem[]) {
     //this.cargar_imagenes(archivos);
-
-
     return Observable.create(observer => {
 
-      let ListAr: File[]=[];
       let formData=new FormData();
+      formData.append('titulo', titulo);
+      formData.append('descripcion', descripcion);
       for(let nar of archivos){
-        ListAr.push(nar.archivo);
-        formData.append('file',nar.archivo);
+        formData.append('file', nar.archivo);
       }
-      let arc={file:ListAr[0]};
-
-
-      let body =formData;
-      console.log(body);
+      console.log(JSON.stringify(formData[0]));
 
       let xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -39,8 +34,6 @@ export class CargarImagenesService {
         }
       });
 
-
-
       xhr.open('POST', this.galeriaURl, true);
       xhr.setRequestHeader('enctype', 'multipart/form-data');
       xhr.setRequestHeader('cache-control', 'no-cache');
@@ -48,18 +41,22 @@ export class CargarImagenesService {
 
 
     });
-
-
-  /*  let headers = new Headers({
-      'enctype':'multipart/form-data',
-      'Content-Type':'multipart/form-data'
-    });
-    return this.http.post( this.galeriaURl, formData,{headers})
-      .map( res => {
-        return res;
-      }); */
   }
 
+  cargarDatosGaleria(titulo, descripcion, url) {
+    let body = {
+      'titulo': titulo,
+      'descripcion': descripcion,
+      'url': url
+    }
+    let headers = new Headers({
+      'Content-Type':'multipart/form-data'
+    });
+    return this.http.post( this.galeriaURl, body,{headers})
+      .map( res => {
+        return res;
+      });
+  }
   cargar_imagenes( archivos: FileItem[] ) {
     console.log('desde cargar_imagenes');
    // var reader = new FileReader();
