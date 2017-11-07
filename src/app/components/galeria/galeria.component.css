@@ -1,0 +1,27 @@
+.contentImg{
+  width: 300px;
+  height: 300px;
+}
+.img{
+  width: 300px;
+  height: 300px;
+}
+
+.nuevo{
+  text-align: right;
+  color: red;
+  font-size: 60px;
+  margin-right: 10px;
+  margin-bottom: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.EliminarImg{
+  position: absolute;
+  cursor: pointer;
+  color: red;
+  font-size: 20px;
+  margin-left: 20px;
+  text-align: right;
+}

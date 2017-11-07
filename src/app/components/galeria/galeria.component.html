@@ -1,14 +1,113 @@
 
-<div class="row">
 
-  <div class="col-md-6">
-
-
-
-
+  <div class="col-md-12">
+   <div>
+     <div class="nuevo " (click)="Modal=!Modal">+</div>
+   </div>
   </div>
 
-  <div class="col-md-6" style="margin-bottom:40px">
+  <div class="col-md-12" *ngFor="let datos of Galeria">
+    <div class="contenGaleria">
+      <div><h3>{{ datos.titulo }}</h3></div>
+      <div>{{datos.descripcion}}</div>
+      <div>
+        <div class="col-md-12">
+          <div class="card-columns">
+            <div  class="contentImg" *ngFor="let img of datos.fotos">
+              <div class="EliminarImg" (click)="EliminarImg(img.id_img)">X</div>
+              <img  [src]="img.url" class="img" >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!--
+  <div class="col-md-12">
+    <div class="card-columns">
+      <div  class="contentImg" *ngFor="let img of Imagenes">
+        <img  [src]="img.url" class="img">
+    </div>
+    </div>
+  </div>-->
+
+  <div *ngIf="Modal" class="modal bd-example-modal-lg" >
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <button type="button" class="close" (click)="Modal=!Modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-5">
+              <h3>Seleccione Imagenes</h3>
+
+              <div appNgDropFiles
+                   [ngClass]="{ 'file-over': estaSobreDropZone }"
+                   (archivoSobre)="archivoSobreDropZone($event)"
+                   [archivos] = "archivos"
+                   class="well drop-zone">
+                <h4>Suelta los archivos aquí</h4>
+                <img src="/assets/img/drop-images.png">
+              </div>
+
+            </div>
+            <div class="col-md-7" style="margin-bottom:40px">
+              <h4>Título</h4>  <input  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              <h4>Descripción</h4>  <textarea name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+
+              <h4>Cargar Imagenes</h4>
+
+              <button type="button" class="btn btn-success"
+                      (click)="cargarImagenesGaleria()"
+                      [disabled]="archivos.length == 0 || !permiteCargar">
+                Cargar a Galería
+              </button>
+
+              <button type="button" class="btn btn-danger"
+                      (click)="limpiarArchivos()">
+                Limpiar archivos
+              </button>
+
+
+              <table class="table" *ngIf="archivos.length > 0">
+                <thead class="thead-inverse">
+                <tr>
+                  <th>Nombre</th>
+                  <th>Tamaño</th>
+                  <th>Progreso</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let archivo of archivos">
+                  <td [ngClass]="{ 'text-green': archivo.estaSubiendo }">
+                    <strong>{{ archivo.nombreArchivo }}</strong>
+                  </td>
+                  <td>
+                    {{ archivo.archivo.size / 1024 / 1024 | number:'.2' }}MB
+                  </td>
+                  <td>
+
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
+                    </div>
+
+                  </td>
+                </tr>
+                </tbody>
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+ <!-- <div class="col-md-6" style="margin-bottom:40px">
     <h4>Título</h4>  <input  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
     <h4>Descripción</h4>  <textarea name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
 
@@ -66,6 +165,6 @@
 
     </table>
 
-  </div>
+  </div> -->
 
-</div>
+
