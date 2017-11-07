@@ -7,9 +7,7 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class CargarImagenesService {
-  private CARPETA_IMAGENES: string = 'img';
-  SentImgURl: string = 'http://localhost:8000/sendImg';
-  galeriaURl: string = 'http://localhost:8000/galeria';
+  galeriaURl: string = 'http://apimodelaje.ourproject.cl/public/galeria';
 
   constructor(private http: Http) { }
 
@@ -21,9 +19,9 @@ export class CargarImagenesService {
       formData.append('titulo', titulo);
       formData.append('descripcion', descripcion);
       for(let nar of archivos){
-        formData.append('file', nar.archivo);
+        formData.append('file[]', nar.archivo);
       }
-      console.log(JSON.stringify(formData[0]));
+      console.log(JSON.stringify(formData));
 
       let xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -43,26 +41,8 @@ export class CargarImagenesService {
     });
   }
 
-  cargarDatosGaleria(titulo, descripcion, url) {
-    let body = {
-      'titulo': titulo,
-      'descripcion': descripcion,
-      'url': url
-    }
-    let headers = new Headers({
-      'Content-Type':'multipart/form-data'
-    });
-    return this.http.post( this.galeriaURl, body,{headers})
-      .map( res => {
-        return res;
-      });
-  }
-  cargar_imagenes( archivos: FileItem[] ) {
+  cargar_imagenes(ref) {
     console.log('desde cargar_imagenes');
-   // var reader = new FileReader();
-   /* for( let item of archivos ){
-      item.estaSubiendo = true;
-      console.log(item);
-    }*/
+
   }
 }
