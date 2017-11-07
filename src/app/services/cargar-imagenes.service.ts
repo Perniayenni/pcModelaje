@@ -7,7 +7,10 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class CargarImagenesService {
+  //galeriaURl: string = 'http://localhost:8000/galeria';
+  //ImgsUrl:string = 'http://localhost:8000/imgs/';
   galeriaURl: string = 'http://apimodelaje.ourproject.cl/public/galeria';
+  ImgsUrl:string = 'http://apimodelaje.ourproject.cl/public/imgs/';
 
   constructor(private http: Http) { }
 
@@ -41,8 +44,25 @@ export class CargarImagenesService {
     });
   }
 
-  cargar_imagenes(ref) {
-    console.log('desde cargar_imagenes');
+  ObtenerGaleria() {
+    return this.http.get(this.galeriaURl)
+      .map(data => {
+        return data.json();
+      });
+  }
 
+  cargar_imagenes(ref, id) {
+    console.log('desde cargar_imagenes');
+    return this.http.get(this.ImgsUrl + ref + '/' + id)
+      .map(data => {
+        return data.json();
+      });
+  }
+
+  eliminar_imagen(id) {
+    return this.http.delete(this.ImgsUrl + id)
+      .map(data => {
+        return data.json();
+      });
   }
 }

@@ -3,21 +3,32 @@
 }
 
 /* Drop Zone */
-.drop-zone { 
-	border: dotted 3px lightgray; 
-	opacity: 0.5; 
-	color: #666; 
-	text-align: center 
+.drop-zone {
+	border: dotted 3px lightgray;
+	opacity: 0.5;
+	color: #666;
+	text-align: center
 }
 
-.file-over { 
-	border: dotted 3px dodgerblue; 
+.file-over {
+	border: dotted 3px dodgerblue;
 }
 
-.table { 
-	margin-top: 30px; 
+.table {
+	margin-top: 30px;
 }
 
-.text-green { 
-	color: green 
+.text-green {
+	color: green
+}
+
+.modal{
+  padding-top: 3%;
+  background: rgba(192,211,211,0.3);
+  display: block !important;
+}
+
+.close{
+  margin-left: 95%;
+  margin-top: 10px;
 }
