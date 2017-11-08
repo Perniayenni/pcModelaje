@@ -26,8 +26,12 @@ export class GaleriaComponent  {
   Galeria: GaleriaItems[]= [];
 
   Modal:boolean = false;
+  ModalAddImg:boolean = false;
 
-  constructor(public _cargaImagenes: CargarImagenesService, private alert:AlertsService) {
+  tituloAddImg:string;
+  id_gAddImg:string;
+
+  constructor(public _cargaImagenes: CargarImagenesService, public alert: AlertsService) {
     this.cargarGaleria();
 
   }
@@ -78,11 +82,31 @@ export class GaleriaComponent  {
       });
   }
 
-  EliminarImg(id){
+  EliminarImg(id) {
     this._cargaImagenes.eliminar_imagen(id)
-      .subscribe(data =>{
+      .subscribe(data => {
         console.log(data);
         this.cargarGaleria();
+      });
+  }
+
+  AbrirModalAddImg(titulo, id) {
+    this.tituloAddImg = titulo;
+    this.id_gAddImg = id;
+    this.ModalAddImg = true;
+  }
+
+  cargarMasImagenes(){
+    this.permiteCargar = false;
+    this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.titulo, this.archivos)
+      .subscribe(data => {
+        let msgs;
+        for (let res of data){
+          msgs = msgs + res + '<br>';
+        }
+        console.log(msgs);
+        this.alert.show_alert('RRRRRR', 'alert-success');
+
       });
   }
 
