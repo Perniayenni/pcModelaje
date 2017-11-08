@@ -98,7 +98,7 @@ export class GaleriaComponent  {
 
   cargarMasImagenes(){
     this.permiteCargar = false;
-    this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.titulo, this.archivos)
+    this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.tituloAddImg, this.archivos)
       .subscribe(data => {
         let msgs;
         for (let res of data){

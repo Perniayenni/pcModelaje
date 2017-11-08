@@ -9,12 +9,14 @@ import {Observable} from "rxjs";
 export class CargarImagenesService {
   //galeriaURl: string = 'http://localhost:8000/galeria';
   //ImgsUrl:string = 'http://localhost:8000/imgs/';
+  AddMasImagenes:string = 'http://apimodelaje.ourproject.cl/public/AddMasImagenes';
   galeriaURl: string = 'http://apimodelaje.ourproject.cl/public/galeria';
   ImgsUrl:string = 'http://apimodelaje.ourproject.cl/public/imgs/';
 
   constructor(private http: Http) { }
 
-  guardarImg(titulo, descripcion, archivos:FileItem[]) {
+  guardarImg(titulo, descripcion, archivos: FileItem[]) {
+    console.log(titulo);
     //this.cargar_imagenes(archivos);
     return Observable.create(observer => {
 
@@ -64,5 +66,36 @@ export class CargarImagenesService {
       .map(data => {
         return data.json();
       });
+  }
+
+
+  // Este metodo carga las imagenes individuales segun el evento.
+  guardarMasImg(id_g, titulo, archivos: FileItem[]) {
+
+    return Observable.create(observer => {
+
+      let formData = new FormData();
+      formData.append('titulo', titulo);
+      formData.append('id_g', id_g);
+      for(let nar of archivos){
+        formData.append('file[]', nar.archivo);
+      }
+      console.log(JSON.stringify(formData));
+
+      let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+      xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
+          return this.responseText;
+        }
+      });
+
+      xhr.open('POST', this.AddMasImagenes, true);
+      xhr.setRequestHeader('enctype', 'multipart/form-data');
+      xhr.setRequestHeader('cache-control', 'no-cache');
+      xhr.send(formData);
+    });
+
   }
 }
