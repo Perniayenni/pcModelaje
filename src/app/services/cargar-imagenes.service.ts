@@ -68,6 +68,12 @@ export class CargarImagenesService {
       });
   }
 
+  eliminar_evento(id){
+    return this.http.delete(this.galeriaURl + '/' + id)
+      .map(data => {
+        return data.json();
+      });
+  }
 
   // Este metodo carga las imagenes individuales segun el evento.
   guardarMasImg(id_g, titulo, archivos: FileItem[]) {

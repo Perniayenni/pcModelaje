@@ -5,7 +5,6 @@ import { Fotos } from '../../Models/Fotos';
 import { NgForm } from '@angular/forms';
 import { CargarImagenesService } from '../../services/cargar-imagenes.service';
 import {forEach} from '@angular/router/src/utils/collection';
-import {AlertsService} from '../../services/alerts.service';
 
 @Component({
   selector: 'app-galeria',
@@ -27,11 +26,20 @@ export class GaleriaComponent  {
 
   Modal:boolean = false;
   ModalAddImg:boolean = false;
+  ModalEliminar:boolean =false;
 
   tituloAddImg:string;
   id_gAddImg:string;
 
-  constructor(public _cargaImagenes: CargarImagenesService, public alert: AlertsService) {
+  tituloEliminar:string;
+  id_Imagen:string;
+  TipoEventEliminar:string;
+
+  sms:string = ''; // Mensaje de Alerta
+  mostrarAlert: boolean = false; // Se inicia la alerta en false hasta que se muestre.
+  ColorAlert:string = 'alert-success';
+
+  constructor(public _cargaImagenes: CargarImagenesService) {
     this.cargarGaleria();
 
   }
@@ -50,8 +58,10 @@ export class GaleriaComponent  {
           msgs = msgs + res + '<br>';
         }
         console.log(msgs);
-        this.alert.show_alert('RRRRRR', 'alert-success');
-
+        this.sms = 'Se guardo de manera exitosa';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 2000);
     });
   }
 
@@ -82,8 +92,8 @@ export class GaleriaComponent  {
       });
   }
 
-  EliminarImg(id) {
-    this._cargaImagenes.eliminar_imagen(id)
+  EliminarImg() {
+    this._cargaImagenes.eliminar_imagen(this.id_Imagen)
       .subscribe(data => {
         console.log(data);
         this.cargarGaleria();
@@ -105,26 +115,38 @@ export class GaleriaComponent  {
           msgs = msgs + res + '<br>';
         }
         console.log(msgs);
-        this.alert.show_alert('RRRRRR', 'alert-success');
+        console.log(msgs);
+        this.sms = msgs;
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 2000);
 
       });
   }
 
-  /*for (let res of data){
-        this.Galeria.push(res.id_g, res.titulo, res.descripcion);
-         /*this._cargaImagenes.cargar_imagenes('Galeria', res.id)
-           .subscribe(data1 => {
-             for (let res1 of data1) {
-               this.Imagenes.push(res1.id_img, res1.url, res1.refc, res1.id_g, res1.id_m, res1.id_d);
-             }
-           });
-} */
+  AbrirModalEliminar(id, evt) {
+    this.TipoEventEliminar = evt;
+    if (evt == 'evento') {
+      console.log(this.TipoEventEliminar);
+      this.tituloEliminar = 'Esta seguro que desea eliminar el evento';
+      this.id_gAddImg = id;
+      this.ModalEliminar = true;
+    }else{
+      console.log(this.TipoEventEliminar);
+      this.tituloEliminar = 'Esta seguro que desea eliminar la imagen del evento';
+      this.id_Imagen = id;
+      this.ModalEliminar = true;
+    }
 
- /* cargarImsg(id) {
-    return this._cargaImagenes.cargar_imagenes('Galeria', '3')
+  }
+
+  EliminarEvento(){
+    console.log(this.id_gAddImg);
+    this._cargaImagenes.eliminar_evento(this.id_gAddImg)
       .subscribe(data => {
-         this.Imagenes = data;
+        console.log(data);
+        this.cargarGaleria();
       });
-  }*/
+  }
 
 }

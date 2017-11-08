@@ -16,7 +16,7 @@ import { app_routing } from './app.routes';
 
 // service
 import { CargarImagenesService } from './services/cargar-imagenes.service';
-import { AlertsService } from './services/alerts.service';
+import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -28,11 +28,11 @@ import { AlertsService } from './services/alerts.service';
     BrowserModule,
     app_routing,
     HttpModule,
-    FormsModule
+    FormsModule,
+    AngularFontAwesomeModule
   ],
   providers: [
-    CargarImagenesService,
-    AlertsService
+    CargarImagenesService
   ],
   bootstrap: [AppComponent]
 })

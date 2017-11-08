@@ -1,34 +1,67 @@
+
+  <div *ngIf="mostrarAlert" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
+    <div class="letraAlert">{{sms}}</div>
+  </div>
+
+
+    <div class="nuevo" (click)="Modal=!Modal" >
+      +
+    <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
+    </div>
+
+
 <div class="row">
-  <div *ngIf="alert.mostrarAlert" class="alert contain-alert" role="alert" [ngClass]="alert.ColorAlert">
-    <div class="letraAlert">{{alert.sms}}</div>
-  </div>
-</div>
-
-  <div class="col-md-12">
-   <div>
-     <div class="nuevo " (click)="Modal=!Modal">+</div>
-   </div>
-  </div>
-
   <div class="col-md-12" *ngFor="let datos of Galeria">
-    <div class="contenGaleria">
-      <div><h3>{{ datos.titulo }}</h3></div>
-      <div>{{datos.descripcion}}</div>
-      <div><button type="button" class="btn btn-success" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button> </div>
-      <div><button type="button" class="btn btn-danger">Eliminar Evento</button> </div>
-      <div>
-        <div class="col-md-12">
-          <div class="card-columns">
-            <div  class="contentImg" *ngFor="let img of datos.fotos">
-              <div class="EliminarImg" (click)="EliminarImg(img.id_img)">X</div>
-              <img  [src]="img.url" class="img" >
+    <div class=" container">
+
+      <div class="contenGaleria ">
+        <div class="contenTitulo ">
+          <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
+          <div class="boton">
+            <button type="button" class="btn btnColorColorGE2" (click)="AbrirModalEliminar(datos.id_g, 'evento')">Eliminar Evento</button>
+          </div>
+        </div>
+
+        <div class="contentDescrip">
+          <div class="titulo">{{datos.descripcion}}</div>
+          <div class="boton">
+            <button type="button" class="btn btnColorColorGE" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>
+          </div>
+        </div>
+        <div class="contenImgs">
+          <div class="col-md-12">
+            <div class="card-columns">
+              <div  class="contentImg" *ngFor="let img of datos.fotos">
+                <div class="EliminarImg" (click)="AbrirModalEliminar(img.id_img, 'img')">X</div>
+                <img  [src]="img.url" class="img" >
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
+  </div>
+</div>
+
+
+<!--Modal de Eliminar-->
+  <div *ngIf="ModalEliminar" class="modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
+      </div>
+      <div class="modal-footer">
+        <button *ngIf="TipoEventEliminar == 'evento'" (click)="EliminarEvento()"  type="button" class="btn btn-danger">Si</button>
+        <button  *ngIf="TipoEventEliminar != 'evento'" (click)="EliminarImg()"  type="button" class="btn btn-success">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de addEvento-->
   <div *ngIf="Modal" class="modal bd-example-modal-lg" >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -104,6 +137,7 @@
     </div>
   </div>
 
+<!--Modal de addImg-->
   <div *ngIf="ModalAddImg" class="modal bd-example-modal-lg" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
