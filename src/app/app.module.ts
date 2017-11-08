@@ -16,6 +16,7 @@ import { app_routing } from './app.routes';
 
 // service
 import { CargarImagenesService } from './services/cargar-imagenes.service';
+import { AlertsService } from './services/alerts.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,10 @@ import { CargarImagenesService } from './services/cargar-imagenes.service';
     HttpModule,
     FormsModule
   ],
-  providers: [CargarImagenesService],
+  providers: [
+    CargarImagenesService,
+    AlertsService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

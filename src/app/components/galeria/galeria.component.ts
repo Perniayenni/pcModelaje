@@ -5,6 +5,7 @@ import { Fotos } from '../../Models/Fotos';
 import { NgForm } from '@angular/forms';
 import { CargarImagenesService } from '../../services/cargar-imagenes.service';
 import {forEach} from '@angular/router/src/utils/collection';
+import {AlertsService} from '../../services/alerts.service';
 
 @Component({
   selector: 'app-galeria',
@@ -26,8 +27,9 @@ export class GaleriaComponent  {
 
   Modal:boolean = false;
 
-  constructor(public _cargaImagenes: CargarImagenesService) {
+  constructor(public _cargaImagenes: CargarImagenesService, private alert:AlertsService) {
     this.cargarGaleria();
+
   }
 
   archivoSobreDropZone( e:boolean ){
@@ -39,7 +41,13 @@ export class GaleriaComponent  {
     this.permiteCargar = false;
     this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
-        console.log(data);
+        let msgs;
+        for (let res of data){
+          msgs = msgs + res + '<br>';
+        }
+        console.log(msgs);
+        this.alert.show_alert('RRRRRR', 'alert-success');
+
     });
   }
 
@@ -67,9 +75,6 @@ export class GaleriaComponent  {
               this.Imagenes = [];
             });
         }
-
-        console.log(this.Galeria);
-
       });
   }
 
