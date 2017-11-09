@@ -11,6 +11,7 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 // Componentes
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { DestacadosComponent } from './components/destacados/destacados.component';
+import { ModelosComponent } from './components/modelos/modelos.component';
 
 // rutas
 import { app_routing } from './app.routes';
@@ -21,12 +22,14 @@ import { DestacadosService } from './services/destacados.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     NgDropFilesDirective,
     GaleriaComponent,
-    DestacadosComponent
+    DestacadosComponent,
+    ModelosComponent
   ],
   imports: [
     BrowserModule,
