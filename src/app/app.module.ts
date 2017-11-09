@@ -10,14 +10,16 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 
 // Componentes
 import { GaleriaComponent } from './components/galeria/galeria.component';
+import { DestacadosComponent } from './components/destacados/destacados.component';
 
 // rutas
 import { app_routing } from './app.routes';
 
 // service
 import { CargarImagenesService } from './services/cargar-imagenes.service';
+import { DestacadosService } from './services/destacados.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
-import { DestacadosComponent } from './components/destacados/destacados.component';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { DestacadosComponent } from './components/destacados/destacados.componen
     AngularFontAwesomeModule
   ],
   providers: [
-    CargarImagenesService
+    CargarImagenesService,
+    DestacadosService
   ],
   bootstrap: [AppComponent]
 })
