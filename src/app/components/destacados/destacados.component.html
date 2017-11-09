@@ -7,6 +7,45 @@
   <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
 </div>
 
+<div class="row">
+  <div class="col-md-12" *ngFor="let datos of Destacados let ig = index">
+    <div class=" container">
+
+      <div class="contentDestacados">
+        <div class="row">
+          <div class="col-md-5">
+            <div  class="contentImgDestacados" *ngFor="let img of datos.fotos let i = index">
+              <img  [src]="img.url" class="img" >
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="contentElEdDestacados">
+                  <i class="fa fa-pencil-square-o cursor" aria-hidden="true"></i>
+                  <i class="fa fa-trash-o cursor" aria-hidden="true"
+                      (click)="AbrirModalEliminard(datos.id_d)"></i>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="conteTituloDestacados">
+                  <h3>{{ datos.titulo }}</h3>
+                </div>
+                <div class="conteDescripcionDestacados">
+                  {{ datos.descripcion }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!--Modal de addDescatados-->
 <div *ngIf="Modal" class="modal bd-example-modal-lg" >
@@ -35,6 +74,21 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de Eliminar-->
+<div *ngIf="ModalEliminar" class="modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-success">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
       </div>
     </div>
   </div>

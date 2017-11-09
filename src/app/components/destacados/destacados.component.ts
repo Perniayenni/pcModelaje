@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FileItem } from '../../models/file-item';
 import { DestacadosService } from '../../services/destacados.service';
+import { DestacadosItems } from '../../Models/Destacados-items';
+import { Fotos } from '../../Models/Fotos';
 
 @Component({
   selector: 'app-destacados',
@@ -24,22 +26,75 @@ export class DestacadosComponent implements OnInit {
   descripcion: string;
   archivos: File[];
 
+  Imagenes: Fotos[]= [];
+  Destacados: DestacadosItems[]= [];
+
+  tituloEliminar:string;
+  id_d:number;
+
   constructor(public serv_des: DestacadosService) {
+    this.ObtenerDestacados();
   }
 
   ngOnInit() {
   }
 
   fileEvent(event) {
-    console.log(event.target.files);
     this.archivos = event.target.files;
   }
 
   AgregarDestacados() {
-    console.log(this.titulo);
-    console.log(this.descripcion);
-    console.log(this.archivos);
     this.serv_des.guardarDestacados(this.titulo, this.descripcion, this.archivos)
-      .subscribe(data => {});
+      .subscribe(data => {
+        if ( data === 'true') {
+          this.Modal = false;
+          this.limpiarDatos();
+          this.ObtenerDestacados();
+          this.sms = 'Evento guardado';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }else{
+          this.Modal = false;
+          this.limpiarDatos();
+          this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
+          this.ColorAlert = 'alert-danger';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }
+      });
+  }
+
+  limpiarDatos(){
+    this.titulo = '';
+    this.descripcion = '';
+  }
+
+  ObtenerDestacados(){
+    let fts;
+    let destacados;
+    this.serv_des.ObtenerDestacados()
+      .subscribe(data => {
+        for (let res of data){
+          this.serv_des.obtener_imagenes('Destacados', res.id_d)
+            .subscribe(data1 => {
+              for (let res1 of data1) {
+                fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
+                this.Imagenes.push(fts);
+              }
+              destacados = new DestacadosItems(res.id_g, res.titulo, res.descripcion, res.fecha, this.Imagenes);
+              this.Destacados.push(destacados);
+              this.Imagenes = [];
+            });
+        }
+        console.log(this.Destacados);
+      });
+  }
+
+  AbrirModalEliminard(id){
+    this.id_d = id;
+    this.tituloEliminar= 'Seguro que desera eliminar'
+    this.ModalEliminar=true;
+
   }
 }

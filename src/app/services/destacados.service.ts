@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FileItem } from '../models/file-item';
+import { Http, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";
 
@@ -9,8 +10,9 @@ export class DestacadosService {
 
   fechaActual:string = new Date().toJSON().slice(0, 10);
   urlDestacados:string = 'http://apimodelaje.ourproject.cl/public/destacados';
+  ImgsUrl:string = 'http://apimodelaje.ourproject.cl/public/imgs/';
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   guardarDestacados(titulo, descripcion, archivos: File[]) {
     return Observable.create(observer => {
@@ -40,6 +42,21 @@ export class DestacadosService {
 
 
     });
+  }
+
+  ObtenerDestacados() {
+    return this.http.get(this.urlDestacados)
+      .map(data => {
+        return data.json();
+      });
+  }
+
+  obtener_imagenes(ref, id) {
+    console.log('desde cargar_imagenes');
+    return this.http.get(this.ImgsUrl + ref + '/' + id)
+      .map(data => {
+        return data.json();
+      });
   }
 
 }
