@@ -39,7 +39,8 @@ export class GaleriaComponent  {
   mostrarAlert: boolean = false; // Se inicia la alerta en false hasta que se muestre.
   ColorAlert:string = 'alert-success';
 
-  indx: number;
+  indxEvento: number;
+  indxImgs: number;
 
   constructor(public _cargaImagenes: CargarImagenesService) {
     this.cargarGaleria();
@@ -55,21 +56,30 @@ export class GaleriaComponent  {
     this.permiteCargar = false;
     this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
-        console.log('DATA'+data)
-        let msgs;
-        if(data.estado == true){
-          for (let res of data){
-            msgs = msgs + res + '<br>';
-          }
-          console.log('MENSAJES MAS'+msgs);
+        if ( data === 'true') {
           this.Modal = false;
+          this.limpiarArchivos();
+          this.limpiarDatos();
+          this.cargarGaleria();
           this.sms = 'Evento guardado';
           this.ColorAlert = 'alert-success';
           this.mostrarAlert = true;
           setTimeout( () => this.mostrarAlert = false, 4000);
-
+        }else{
+          this.Modal = false;
+          this.limpiarArchivos();
+          this.limpiarDatos();
+          this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
+          this.ColorAlert = 'alert-danger';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
         }
     });
+  }
+
+  limpiarDatos(){
+    this.titulo = '';
+    this.descripcion = '';
   }
 
   limpiarArchivos() {
@@ -104,7 +114,7 @@ export class GaleriaComponent  {
       .subscribe(data => {
         this.ModalEliminar = false;
         //this.Galeria[].fotos.splice(this.indx, 1);
-        this.Galeria.splice(this.indx, 1);
+        this.Galeria[this.indxEvento].fotos.splice(this.indxImgs, 1);
         this.sms = 'Imagen Eliminada';
         this.ColorAlert = 'alert-success';
         this.mostrarAlert = true;
@@ -123,23 +133,33 @@ export class GaleriaComponent  {
     this.permiteCargar = false;
     this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.tituloAddImg, this.archivos)
       .subscribe(data => {
-        let msgs;
-        for (let res of data){
-          msgs = msgs + res + '<br>';
+        if (data === 'true') {
+          this.ModalAddImg = false;
+          this.limpiarArchivos();
+          this.limpiarDatos();
+          this.cargarGaleria();
+          this.sms = 'Se añadieron más imagenes';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }else {
+          this.ModalAddImg = false;
+          this.limpiarArchivos();
+          this.limpiarDatos();
+          this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
+          this.ColorAlert = 'alert-danger';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
         }
-        console.log(msgs);
-        console.log(msgs);
-        this.sms = msgs;
-        this.ColorAlert = 'alert-success';
-        this.mostrarAlert = true;
-        setTimeout( () => this.mostrarAlert = false, 2000);
+
 
       });
   }
 
-  AbrirModalEliminar(id, evt, idx) {
+  AbrirModalEliminar(id, evt, idcEvento, idxImgs ) {
     this.TipoEventEliminar = evt;
-    this.indx = idx;
+    this.indxEvento = idcEvento;
+    this.indxImgs = idxImgs;
     if (evt == 'evento') {
       console.log(this.TipoEventEliminar);
       this.tituloEliminar = 'Esta seguro que desea eliminar el evento';
@@ -154,12 +174,12 @@ export class GaleriaComponent  {
 
   }
 
-  EliminarEvento(){
+  EliminarEvento() {
     console.log(this.id_gAddImg);
     this._cargaImagenes.eliminar_evento(this.id_gAddImg)
       .subscribe(data => {
         this.ModalEliminar = false;
-        this.Galeria.splice(this.indx, 1);
+        this.Galeria.splice(this.indxEvento, 1);
         this.sms = 'Evento eliminado';
         this.ColorAlert = 'alert-success';
         this.mostrarAlert = true;

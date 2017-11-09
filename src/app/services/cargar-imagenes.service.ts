@@ -31,7 +31,7 @@ export class CargarImagenesService {
       xhr.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
           console.log(this.response);
-          observer.next(this.response.json());
+          observer.next(this.responseText);
           observer.complete();
         }
       });
@@ -91,8 +91,8 @@ export class CargarImagenesService {
 
       xhr.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
-          console.log(this.responseText);
-          return this.responseText;
+          observer.next(this.responseText);
+          observer.complete();
         }
       });
 

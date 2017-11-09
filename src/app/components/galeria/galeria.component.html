@@ -18,7 +18,7 @@
         <div class="contenTitulo ">
           <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
           <div class="boton">
-            <button type="button" class="btn btnColorColorGE2" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig)">Eliminar Evento</button>
+            <button type="button" class="btn btnColorColorGE2" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>
           </div>
         </div>
 
@@ -32,7 +32,7 @@
           <div class="col-md-12">
             <div class="card-columns">
               <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
-                <div class="EliminarImg" (click)="AbrirModalEliminar(img.id_img, 'img', i)">X</div>
+                <div class="EliminarImg" (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)">X</div>
                 <img  [src]="img.url" class="img" >
               </div>
             </div>
