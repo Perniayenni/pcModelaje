@@ -16,24 +16,23 @@ export class CargarImagenesService {
   constructor(private http: Http) { }
 
   guardarImg(titulo, descripcion, archivos: FileItem[]) {
-    console.log(titulo);
     //this.cargar_imagenes(archivos);
     return Observable.create(observer => {
 
-      let formData=new FormData();
+      let formData = new FormData();
       formData.append('titulo', titulo);
       formData.append('descripcion', descripcion);
       for(let nar of archivos){
         formData.append('file[]', nar.archivo);
       }
-      console.log(JSON.stringify(formData));
 
       let xhr: XMLHttpRequest = new XMLHttpRequest();
 
       xhr.addEventListener('readystatechange', function () {
         if (this.readyState === 4) {
-          console.log(this.responseText);
-          return this.responseText;
+          console.log(this.response);
+          observer.next(this.response.json());
+          observer.complete();
         }
       });
 

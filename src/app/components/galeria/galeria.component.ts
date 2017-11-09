@@ -39,6 +39,8 @@ export class GaleriaComponent  {
   mostrarAlert: boolean = false; // Se inicia la alerta en false hasta que se muestre.
   ColorAlert:string = 'alert-success';
 
+  indx: number;
+
   constructor(public _cargaImagenes: CargarImagenesService) {
     this.cargarGaleria();
 
@@ -53,15 +55,20 @@ export class GaleriaComponent  {
     this.permiteCargar = false;
     this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
+        console.log('DATA'+data)
         let msgs;
-        for (let res of data){
-          msgs = msgs + res + '<br>';
+        if(data.estado == true){
+          for (let res of data){
+            msgs = msgs + res + '<br>';
+          }
+          console.log('MENSAJES MAS'+msgs);
+          this.Modal = false;
+          this.sms = 'Evento guardado';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
+
         }
-        console.log(msgs);
-        this.sms = 'Se guardo de manera exitosa';
-        this.ColorAlert = 'alert-success';
-        this.mostrarAlert = true;
-        setTimeout( () => this.mostrarAlert = false, 2000);
     });
   }
 
@@ -95,8 +102,14 @@ export class GaleriaComponent  {
   EliminarImg() {
     this._cargaImagenes.eliminar_imagen(this.id_Imagen)
       .subscribe(data => {
-        console.log(data);
-        this.cargarGaleria();
+        this.ModalEliminar = false;
+        //this.Galeria[].fotos.splice(this.indx, 1);
+        this.Galeria.splice(this.indx, 1);
+        this.sms = 'Imagen Eliminada';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 4000);
+
       });
   }
 
@@ -124,14 +137,15 @@ export class GaleriaComponent  {
       });
   }
 
-  AbrirModalEliminar(id, evt) {
+  AbrirModalEliminar(id, evt, idx) {
     this.TipoEventEliminar = evt;
+    this.indx = idx;
     if (evt == 'evento') {
       console.log(this.TipoEventEliminar);
       this.tituloEliminar = 'Esta seguro que desea eliminar el evento';
       this.id_gAddImg = id;
       this.ModalEliminar = true;
-    }else{
+    }else {
       console.log(this.TipoEventEliminar);
       this.tituloEliminar = 'Esta seguro que desea eliminar la imagen del evento';
       this.id_Imagen = id;
@@ -144,8 +158,12 @@ export class GaleriaComponent  {
     console.log(this.id_gAddImg);
     this._cargaImagenes.eliminar_evento(this.id_gAddImg)
       .subscribe(data => {
-        console.log(data);
-        this.cargarGaleria();
+        this.ModalEliminar = false;
+        this.Galeria.splice(this.indx, 1);
+        this.sms = 'Evento eliminado';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 4000);
       });
   }
 
