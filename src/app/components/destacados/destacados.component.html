@@ -8,7 +8,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-12" *ngFor="let datos of Destacados let ig = index">
+  <div class="col-md-12" *ngFor="let datos of Destacados let idxDes = index">
     <div class=" container">
 
       <div class="contentDestacados">
@@ -22,9 +22,10 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="contentElEdDestacados">
-                  <i class="fa fa-pencil-square-o cursor" aria-hidden="true"></i>
+                  <i class="fa fa-pencil-square-o cursor" aria-hidden="true"
+                        (click)="AbrirlModalEditarDestacados(datos.id_d, datos.titulo, datos.descripcion)"></i>
                   <i class="fa fa-trash-o cursor" aria-hidden="true"
-                      (click)="AbrirModalEliminard(datos.id_d)"></i>
+                      (click)="AbrirModalEliminard(datos.id_d, idxDes)"></i>
                 </div>
               </div>
             </div>
@@ -87,8 +88,35 @@
         <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
       </div>
       <div class="modal-footer">
-        <button  type="button" class="btn btn-success">Si</button>
+        <button  type="button" (click)="EliminarDestacados()"  class="btn btn-success">Si</button>
         <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de EditDescatados-->
+<div *ngIf="ModalAEditDest" class="modal bd-example-modal-lg" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" (click)="ModalAEditDest=!ModalAEditDest" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12" style="margin-bottom:40px">
+            <form  #forma="ngForm" novalidate>
+              <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+
+              <button type="button" class="btn btn-success"
+                      [disabled]="!forma.valid "
+                      (click)="AgregarDestacados()">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   </div>

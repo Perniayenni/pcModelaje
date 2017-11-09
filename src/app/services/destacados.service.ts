@@ -59,4 +59,11 @@ export class DestacadosService {
       });
   }
 
+  EliminarDestacados(id) {
+    return this.http.delete(this.urlDestacados + '/' + id)
+      .map(data => {
+        return data.json();
+      });
+  }
+
 }

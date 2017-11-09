@@ -20,7 +20,7 @@ export class DestacadosComponent implements OnInit {
   Modal: boolean = false;
   ModalAddImg: boolean = false;
   ModalEliminar: boolean = false;
-  ModalAEditEvento: boolean = false;
+  ModalAEditDest: boolean = false;
 
   titulo: string;
   descripcion: string;
@@ -31,6 +31,7 @@ export class DestacadosComponent implements OnInit {
 
   tituloEliminar:string;
   id_d:number;
+  idxDestacados:number;
 
   constructor(public serv_des: DestacadosService) {
     this.ObtenerDestacados();
@@ -82,7 +83,7 @@ export class DestacadosComponent implements OnInit {
                 fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
                 this.Imagenes.push(fts);
               }
-              destacados = new DestacadosItems(res.id_g, res.titulo, res.descripcion, res.fecha, this.Imagenes);
+              destacados = new DestacadosItems(res.id_d, res.titulo, res.descripcion, res.fecha, this.Imagenes);
               this.Destacados.push(destacados);
               this.Imagenes = [];
             });
@@ -91,10 +92,30 @@ export class DestacadosComponent implements OnInit {
       });
   }
 
-  AbrirModalEliminard(id){
+  AbrirModalEliminard(id, idx) {
     this.id_d = id;
-    this.tituloEliminar= 'Seguro que desera eliminar'
-    this.ModalEliminar=true;
+    this.idxDestacados = idx;
+    this.tituloEliminar = 'Seguro que desera eliminar'
+    this.ModalEliminar = true;
 
+  }
+
+  EliminarDestacados() {
+    this.serv_des.EliminarDestacados(this.id_d)
+      .subscribe(data => {
+        this.ModalEliminar = false;
+        this.Destacados.splice(this.idxDestacados, 1);
+        this.sms = 'Articulo eliminado';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 4000);
+      });
+  }
+
+  AbrirlModalEditarDestacados(id, ti, des){
+    this.id_d = id;
+    this.titulo = ti;
+    this.descripcion = des;
+    this.ModalAEditDest = true;
   }
 }
