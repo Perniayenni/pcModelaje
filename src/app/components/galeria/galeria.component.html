@@ -84,14 +84,15 @@
 
             </div>
             <div class="col-md-7" style="margin-bottom:40px">
-              <h4>Título</h4>  <input  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-              <h4>Descripción</h4>  <textarea name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              <form  #forma="ngForm" novalidate>
+              <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
 
               <h4>Cargar Imagenes</h4>
 
               <button type="button" class="btn btn-success"
                       (click)="cargarImagenesGaleria()"
-                      [disabled]="archivos.length == 0 || !permiteCargar">
+                      [disabled]="archivos.length == 0 || !permiteCargar || !forma.valid ">
                 Cargar a Galería
               </button>
 
@@ -99,8 +100,7 @@
                       (click)="limpiarArchivos()">
                 Limpiar archivos
               </button>
-
-
+              </form>
               <table class="table" *ngIf="archivos.length > 0">
                 <thead class="thead-inverse">
                 <tr>
