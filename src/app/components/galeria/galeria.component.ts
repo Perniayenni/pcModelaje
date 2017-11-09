@@ -27,6 +27,7 @@ export class GaleriaComponent  {
   Modal:boolean = false;
   ModalAddImg:boolean = false;
   ModalEliminar:boolean =false;
+  ModalAEditEvento:boolean= false;
 
   tituloAddImg:string;
   id_gAddImg:string;
@@ -109,20 +110,6 @@ export class GaleriaComponent  {
       });
   }
 
-  EliminarImg() {
-    this._cargaImagenes.eliminar_imagen(this.id_Imagen)
-      .subscribe(data => {
-        this.ModalEliminar = false;
-        //this.Galeria[].fotos.splice(this.indx, 1);
-        this.Galeria[this.indxEvento].fotos.splice(this.indxImgs, 1);
-        this.sms = 'Imagen Eliminada';
-        this.ColorAlert = 'alert-success';
-        this.mostrarAlert = true;
-        setTimeout( () => this.mostrarAlert = false, 4000);
-
-      });
-  }
-
   AbrirModalAddImg(titulo, id) {
     this.tituloAddImg = titulo;
     this.id_gAddImg = id;
@@ -187,4 +174,23 @@ export class GaleriaComponent  {
       });
   }
 
+  EliminarImg() {
+    this._cargaImagenes.eliminar_imagen(this.id_Imagen)
+      .subscribe(data => {
+        this.ModalEliminar = false;
+        //this.Galeria[].fotos.splice(this.indx, 1);
+        this.Galeria[this.indxEvento].fotos.splice(this.indxImgs, 1);
+        this.sms = 'Imagen Eliminada';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 4000);
+
+      });
+  }
+
+  AbrirModalEditarEvento(id, titulo, descrip){
+    this.titulo = titulo;
+    this.descripcion = descrip;
+    this.ModalAEditEvento = true;
+  }
 }
