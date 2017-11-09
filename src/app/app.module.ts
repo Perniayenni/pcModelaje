@@ -19,6 +19,7 @@ import { app_routing } from './app.routes';
 // service
 import { CargarImagenesService } from './services/cargar-imagenes.service';
 import { DestacadosService } from './services/destacados.service';
+import {  ModelosService } from './services/modelos.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
 
 
@@ -40,7 +41,8 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
   ],
   providers: [
     CargarImagenesService,
-    DestacadosService
+    DestacadosService,
+    ModelosService
   ],
   bootstrap: [AppComponent]
 })

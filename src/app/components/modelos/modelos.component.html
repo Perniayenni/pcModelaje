@@ -1,3 +1,50 @@
-<p>
-  modelos works!
-</p>
+<div *ngIf="mostrarAlert" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
+  <div class="letraAlert">{{sms}}</div>
+</div>
+
+<div class="nuevo" (click)="Modal=!Modal" >
+  +
+  <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
+</div>
+
+
+<!--Modal de addModelos-->
+<div *ngIf="Modal" class="modal bd-example-modal-lg" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" (click)="Modal=!Modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-5">
+            <h3>Seleccione una foto</h3>
+            <input type="file" (change)="fileEvent($event)" class="form-control-file">
+            <!--<input type="file" class="form-control-file" [(ngModel)]="archivo">-->
+          </div>
+          <div class="col-md-7" style="margin-bottom:40px">
+            <form  #forma="ngForm" novalidate>
+              <h4>Nombre</h4>  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+              <h4>Nivel</h4>
+              <select  required style="width: 100%"
+                       class="custom-select" [(ngModel)]="nivel"
+                       name="nivel">
+                <option>Seleccione un nivel</option>
+                <option *ngFor='let nvel of Nivel'
+                        [value]="nvel">
+                  {{nvel}}</option>
+              </select>
+              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+
+              <button type="button" class="btn btn-success"
+                      [disabled]="!forma.valid "
+                      (click)="AgregarModelo()">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

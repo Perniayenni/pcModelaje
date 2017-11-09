@@ -18,7 +18,6 @@ export class DestacadosComponent implements OnInit {
 
   // Modals
   Modal: boolean = false;
-  ModalAddImg: boolean = false;
   ModalEliminar: boolean = false;
   ModalAEditDest: boolean = false;
 
