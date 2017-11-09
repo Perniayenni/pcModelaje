@@ -17,12 +17,14 @@ import { app_routing } from './app.routes';
 // service
 import { CargarImagenesService } from './services/cargar-imagenes.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
+import { DestacadosComponent } from './components/destacados/destacados.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NgDropFilesDirective,
-    GaleriaComponent
+    GaleriaComponent,
+    DestacadosComponent
   ],
   imports: [
     BrowserModule,
