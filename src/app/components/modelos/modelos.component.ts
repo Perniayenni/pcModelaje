@@ -17,6 +17,8 @@ export class ModelosComponent implements OnInit {
 
   // Modals
   Modal: boolean = false;
+  ModalEliminar: boolean = false;
+  ModalAEditMod:boolean = false;
 
   Nivel = [
     'Joven',
@@ -29,6 +31,10 @@ export class ModelosComponent implements OnInit {
 
   Imagenes: Fotos[]= [];
   Modelos: ModelosItems[]= [];
+
+  tituloEliminar:string;
+  id_m:number;
+  idxModelos:number;
 
   constructor(private servMod: ModelosService) {
     this.obtenerModelos();
@@ -47,6 +53,7 @@ export class ModelosComponent implements OnInit {
         if ( data === 'true') {
           this.Modal = false;
           this.limpiarDatos();
+          this.obtenerModelos();
           this.sms = 'Modelo guardada';
           this.ColorAlert = 'alert-success';
           this.mostrarAlert = true;
@@ -74,6 +81,7 @@ export class ModelosComponent implements OnInit {
     let modelos;
     this.servMod.ObtenerModelos()
       .subscribe(data => {
+        console.log(data);
         for (let res of data){
           this.servMod.obtener_imagenesModelo('Modelos', res.id_m)
             .subscribe(data1 => {
@@ -81,12 +89,62 @@ export class ModelosComponent implements OnInit {
                 fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
                 this.Imagenes.push(fts);
               }
-              modelos = new ModelosItems(res.id_m, res.titulo, res.descripcion, res.fecha, this.Imagenes);
+              modelos = new ModelosItems(res.id_m, res.nombreCompleto, res.descripcion, res.nivel, this.Imagenes);
               this.Modelos.push(modelos);
               this.Imagenes = [];
             });
         }
         console.log(this.Modelos);
+      });
+  }
+
+  AbrirModalEli(id, idx){
+    this.id_m = id;
+    this.idxModelos = idx;
+    this.tituloEliminar = 'Seguro que desera eliminar la modelo'
+    this.ModalEliminar = true;
+
+  }
+
+  EliminarModelos(){
+    this.servMod.EliminarModelos(this.id_m)
+      .subscribe(data => {
+        this.ModalEliminar = false;
+        this.Modelos.splice(this.idxModelos, 1);
+        this.sms = 'Modelo eliminada';
+        this.ColorAlert = 'alert-success';
+        this.mostrarAlert = true;
+        setTimeout( () => this.mostrarAlert = false, 4000);
+      });
+  }
+
+  AbrirlModalEditarModelo(id, nombre, nivel, desc){
+    this.ModalAEditMod = true;
+    this.id_m = id;
+    this.nombre = nombre;
+    this.nivel = nivel;
+    this.descripcion = desc;
+
+  }
+
+  EditarModelo(){
+    this.servMod.editarModelos(this.id_m, this.nombre, this.nivel, this.descripcion)
+      .subscribe(data => {
+        if (data.mensaje == true){
+          this.ModalAEditMod = false;
+          this.sms = 'Modelo editada';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          this.obtenerModelos();
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }else{
+          this.ModalAEditMod = false;
+          this.sms = 'Ocurrio un error porfavor intente mas tarde';
+          this.ColorAlert = 'alert-danger';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }
+
       });
   }
 }

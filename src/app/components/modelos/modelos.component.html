@@ -7,6 +7,30 @@
   <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
 </div>
 
+<div class="row">
+  <div class=" container">
+    <div class="contentModelos" *ngFor="let modelo of Modelos let idxMo = index">
+      <div class="contentEliEdi">
+        <i class="fa fa-pencil-square-o" aria-hidden="true" (click)="AbrirlModalEditarModelo(modelo.id_m, modelo.nombre, modelo.nivel, modelo.descripcion)"></i>
+        <i class="fa fa-trash-o cursor" aria-hidden="true" (click)="AbrirModalEli(modelo.id_m, idxMo)"></i>
+      </div>
+      <div class="ContentImgModelos"  *ngFor="let img of modelo.fotos let i = index">
+        <img class="card-img-top imgModel" [src]="img.url" [alt]="modelo.nombre">
+      </div>
+      <div class="contentNombreModelo">
+        {{ modelo.nombre }}
+      </div>
+      <div class="contentNivelModelo">
+        {{ modelo.nivel }}
+      </div>
+      <div class="contentDescripcionModelo">
+        {{modelo.descripcion}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 <!--Modal de addModelos-->
 <div *ngIf="Modal" class="modal bd-example-modal-lg" >
@@ -39,6 +63,58 @@
               <button type="button" class="btn btn-success"
                       [disabled]="!forma.valid "
                       (click)="AgregarModelo()">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de Eliminar-->
+<div *ngIf="ModalEliminar" class="modal1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" (click)="EliminarModelos()"  class="btn btn-success">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de EditModelos-->
+<div *ngIf="ModalAEditMod" class="modal bd-example-modal-lg" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <button type="button" class="close" (click)="ModalAEditMod=!ModalAEditMod" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12" style="margin-bottom:40px">
+            <form  #forma="ngForm" novalidate>
+              <h4>Nombre Completo</h4>  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+              <h4>Nivel</h4>
+              <select  required style="width: 100%"
+                       class="custom-select" [(ngModel)]="nivel"
+                       name="nivel">
+                <option>Seleccione un nivel</option>
+                <option *ngFor='let nvel of Nivel'
+                        [value]="nvel">
+                  {{nvel}}</option>
+              </select>
+
+              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+
+              <button type="button" class="btn btn-success"
+                      [disabled]="!forma.valid "
+                      (click)="EditarModelo()">
                 Enviar
               </button>
             </form>

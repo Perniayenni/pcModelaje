@@ -52,4 +52,28 @@ export class ModelosService {
         return data.json();
       });
   }
+
+  EliminarModelos(id) {
+    return this.http.delete(this.urlModelos + '/' + id)
+      .map(data => {
+        return data.json();
+      });
+  }
+
+  editarModelos(id, nombre, nivel, descripcion) {
+    let body = {
+      'nombreCompleto' : nombre,
+      'nivel': nivel,
+      'descripcion' : descripcion
+    }
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    let url = this.urlModelos + '/' + id;
+    return this.http.put( url, body, { headers })
+      .map( res => {
+        return res.json();
+      });
+  }
 }

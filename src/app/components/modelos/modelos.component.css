@@ -1,0 +1,65 @@
+.contentModelos{
+  height: auto;
+  width: 290px;
+  /*background: red;*/
+  float: left;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
+  border-radius: 10px;
+
+}
+.ContentImgModelos{
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 300px;
+  background: blue;
+  overflow: hidden;
+
+}
+
+.contentNombreModelo{
+ /* background: green;*/
+  width: 280px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+
+}
+
+.imgModel{
+  width: 290px;
+  height: 330px;
+}
+
+.contentNivelModelo{
+ /*background: palegreen;*/
+  width: 280px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 5px;
+}
+.contentDescripcionModelo{
+ /* background: palegreen;*/
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+.contentEliEdi{
+  width: 280px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  text-align: right;
+}

@@ -128,6 +128,12 @@ export class DestacadosComponent implements OnInit {
           this.mostrarAlert = true;
           this.ObtenerDestacados();
           setTimeout( () => this.mostrarAlert = false, 4000);
+        }else{
+          this.ModalAEditDest = false;
+          this.sms = 'Ocurrio un error porfavor intente mas tarde';
+          this.ColorAlert = 'alert-danger';
+          this.mostrarAlert = true;
+          setTimeout( () => this.mostrarAlert = false, 4000);
         }
 
       });
