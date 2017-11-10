@@ -2,7 +2,7 @@
 
   width: 99%;
   border: 1px solid gray;
-  height: 330px;
+  height: auto;
   -webkit-box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 36px -19px rgba(0,0,0,0.75);
@@ -16,7 +16,19 @@
   height: 30px;
   width: 99%;
   text-align: right;
+  margin-right: 50px;
 }
-.contentImgDestacados{
-  padding: 10px;
+.contentImgDestacados {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.contGraDestacados{
+  width: 99%;
+  height: 300px;
+  margin-left: 20px;
+  margin-right: 30px;
+
 }

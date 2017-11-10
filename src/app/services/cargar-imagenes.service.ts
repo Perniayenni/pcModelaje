@@ -103,4 +103,22 @@ export class CargarImagenesService {
     });
 
   }
+
+  editarEvento(id, titulo, descripcion) {
+    let body = {
+      'titulo' : titulo,
+      'descripcion' : descripcion
+    }
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+
+    let url = this.galeriaURl + '/' + id;
+
+    return this.http.put( url, body, { headers })
+      .map( res => {
+        return res.json();
+      });
+  }
+
 }

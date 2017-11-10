@@ -13,31 +13,27 @@
 
       <div class="contentDestacados">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <div  class="contentImgDestacados" *ngFor="let img of datos.fotos let i = index">
-              <img  [src]="img.url" class="img" >
+              <img  [src]="img.url" class="img-fluid" >
             </div>
           </div>
-          <div class="col-md-7">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="contentElEdDestacados">
-                  <i class="fa fa-pencil-square-o cursor" aria-hidden="true"
-                        (click)="AbrirlModalEditarDestacados(datos.id_d, datos.titulo, datos.descripcion)"></i>
-                  <i class="fa fa-trash-o cursor" aria-hidden="true"
-                      (click)="AbrirModalEliminard(datos.id_d, idxDes)"></i>
+          <div class="col-md-8">
+            <div class="contGraDestacados">
+                <div class="col-md-12">
+                  <div class="contentElEdDestacados">
+                    <i class="fa fa-pencil-square-o cursor" aria-hidden="true"
+                       (click)="AbrirlModalEditarDestacados(datos.id_d, datos.titulo, datos.descripcion)"></i>
+                    <i class="fa fa-trash-o cursor" aria-hidden="true"
+                       (click)="AbrirModalEliminard(datos.id_d, idxDes)"></i>
+                  </div>
+                  <div class="conteTituloDestacados">
+                    <h3>{{ datos.titulo }}</h3>
+                  </div>
+                  <div class="conteDescripcionDestacados">
+                    {{ datos.descripcion }}
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="conteTituloDestacados">
-                  <h3>{{ datos.titulo }}</h3>
-                </div>
-                <div class="conteDescripcionDestacados">
-                  {{ datos.descripcion }}
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -57,12 +53,12 @@
       </button>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-5">
+          <div class="col-md-4">
             <h3>Seleccione Una img</h3>
             <input type="file" (change)="fileEvent($event)" class="form-control-file">
             <!--<input type="file" class="form-control-file" [(ngModel)]="archivo">-->
           </div>
-          <div class="col-md-7" style="margin-bottom:40px">
+          <div class="col-md-8" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>
               <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
               <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>

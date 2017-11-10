@@ -43,6 +43,8 @@ export class GaleriaComponent  {
   indxEvento: number;
   indxImgs: number;
 
+  idGaleria:number;
+
   constructor(public _cargaImagenes: CargarImagenesService) {
     this.cargarGaleria();
 
@@ -191,6 +193,22 @@ export class GaleriaComponent  {
   AbrirModalEditarEvento(id, titulo, descrip){
     this.titulo = titulo;
     this.descripcion = descrip;
+    this.idGaleria = id;
     this.ModalAEditEvento = true;
+  }
+
+  EditarEvento(){
+    this._cargaImagenes.editarEvento(this.idGaleria, this.titulo, this.descripcion)
+      .subscribe(data => {
+        if (data.mensaje == true){
+          this.ModalAEditEvento = false;
+          this.sms = 'Evento editado';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          this.cargarGaleria();
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }
+
+      });
   }
 }
