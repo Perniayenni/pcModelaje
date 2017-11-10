@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FileItem } from '../../models/file-item';
 import { DestacadosService } from '../../services/destacados.service';
 import { DestacadosItems } from '../../Models/Destacados-items';
 import { Fotos } from '../../Models/Fotos';

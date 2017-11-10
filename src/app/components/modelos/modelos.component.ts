@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelosService } from '../../services/modelos.service';
+import { ModelosItems } from '../../Models/Modelos-items';
+import { Fotos } from '../../Models/Fotos';
 
 @Component({
   selector: 'app-modelos',
@@ -25,7 +27,12 @@ export class ModelosComponent implements OnInit {
   descripcion: string;
   archivos: File[];
 
-  constructor(private servMod: ModelosService) { }
+  Imagenes: Fotos[]= [];
+  Modelos: ModelosItems[]= [];
+
+  constructor(private servMod: ModelosService) {
+    this.obtenerModelos();
+  }
 
   ngOnInit() {
   }
@@ -59,5 +66,27 @@ export class ModelosComponent implements OnInit {
     this.nombre = '';
     this.nivel = '';
     this.descripcion = '';
+  }
+
+  obtenerModelos() {
+    this.Modelos = [];
+    let fts;
+    let modelos;
+    this.servMod.ObtenerModelos()
+      .subscribe(data => {
+        for (let res of data){
+          this.servMod.obtener_imagenesModelo('Modelos', res.id_m)
+            .subscribe(data1 => {
+              for (let res1 of data1) {
+                fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
+                this.Imagenes.push(fts);
+              }
+              modelos = new ModelosItems(res.id_m, res.titulo, res.descripcion, res.fecha, this.Imagenes);
+              this.Modelos.push(modelos);
+              this.Imagenes = [];
+            });
+        }
+        console.log(this.Modelos);
+      });
   }
 }

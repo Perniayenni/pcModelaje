@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { FileItem } from '../models/file-item';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/Rx';
 import {Observable} from "rxjs";

@@ -38,4 +38,18 @@ export class ModelosService {
       xhr.send(formData);
     });
   }
+
+  ObtenerModelos() {
+    return this.http.get(this.urlModelos)
+      .map(data => {
+        return data.json();
+      });
+  }
+
+  obtener_imagenesModelo(ref, id) {
+    return this.http.get(this.ImgsUrl + ref + '/' + id)
+      .map(data => {
+        return data.json();
+      });
+  }
 }
