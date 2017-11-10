@@ -71,6 +71,7 @@ export class DestacadosComponent implements OnInit {
   }
 
   ObtenerDestacados(){
+    this.Destacados = [];
     let fts;
     let destacados;
     this.serv_des.ObtenerDestacados()
@@ -87,7 +88,6 @@ export class DestacadosComponent implements OnInit {
               this.Imagenes = [];
             });
         }
-        console.log(this.Destacados);
       });
   }
 
@@ -116,5 +116,21 @@ export class DestacadosComponent implements OnInit {
     this.titulo = ti;
     this.descripcion = des;
     this.ModalAEditDest = true;
+  }
+
+  EditarDestacads(){
+    console.log(this.id_d);
+    this.serv_des.editarDestacados(this.id_d, this.titulo, this.descripcion)
+      .subscribe(data => {
+        if (data.mensaje == true){
+          this.ModalAEditDest = false;
+          this.sms = 'Evento editado';
+          this.ColorAlert = 'alert-success';
+          this.mostrarAlert = true;
+          this.ObtenerDestacados();
+          setTimeout( () => this.mostrarAlert = false, 4000);
+        }
+
+      });
   }
 }
