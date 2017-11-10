@@ -1,10 +1,15 @@
+<div *ngIf="loadingPr" class="loadingPr">
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  <span class="sr-only">Loading...</span>
+</div>
 
-  <div *ngIf="mostrarAlert" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
+  <div *ngIf="mostrarAlert && !loadingPr" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
     <div class="letraAlert">{{sms}}</div>
   </div>
 
 
-    <div class="nuevo" (click)="Modal=!Modal" >
+    <div *ngIf="!loadingPr" class="nuevo" (click)="Modal=!Modal" >
+      <span>Agregar</span>
       +
     <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
     </div>
@@ -215,10 +220,15 @@
   <div *ngIf="ModalAEditEvento" class="modal bd-example-modal-lg" >
     <div class="modal-dialog " role="document">
       <div class="modal-content">
-        <button type="button" class="close" (click)="ModalAEditEvento=!ModalAEditEvento" aria-label="Close">
+
+        <div *ngIf="loadingM" class="loadingM">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+        <button *ngIf="!loadingM" type="button" class="close" (click)="ModalAEditEvento=!ModalAEditEvento" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <div class="modal-body">
+        <div class="modal-body" *ngIf="!loadingM">
           <div class="row">
             <div class="col-md-12">
               <form  #forma="ngForm" novalidate>

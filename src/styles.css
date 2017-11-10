@@ -71,6 +71,20 @@
   margin-top: 10px;
   margin-left: 20px;
   position: relative;
+  width: 60px;
+}
+
+.nuevo span {
+  font-size: 12px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+  position: absolute;
+  display: none;
+}
+
+.nuevo:hover span{
+  display: block;
 }
 
 .EliminarImg{
@@ -142,4 +156,16 @@
 
 .cursor{
   cursor: pointer;
+}
+
+.loadingPr{
+  text-align: center;
+  font-size: 50px;
+  margin-top: 100px;
+}
+.loadingM{
+  text-align: center;
+  font-size: 40px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }

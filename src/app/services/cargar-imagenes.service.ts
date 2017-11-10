@@ -19,6 +19,7 @@ export class CargarImagenesService {
     //this.cargar_imagenes(archivos);
     return Observable.create(observer => {
 
+
       let formData = new FormData();
       formData.append('titulo', titulo);
       formData.append('descripcion', descripcion);
@@ -40,6 +41,9 @@ export class CargarImagenesService {
       xhr.setRequestHeader('enctype', 'multipart/form-data');
       xhr.setRequestHeader('cache-control', 'no-cache');
       xhr.send(formData);
+      for (let ar of archivos){
+        ar.progreso = xhr.status;
+      }
 
 
     });

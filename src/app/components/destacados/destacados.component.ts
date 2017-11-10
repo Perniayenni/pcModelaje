@@ -10,6 +10,10 @@ import { Fotos } from '../../Models/Fotos';
 })
 export class DestacadosComponent implements OnInit {
 
+
+  loadingPr:boolean = true ;
+  loadingM:boolean = false;
+
   // Alert
   sms: string = ''; // Mensaje de Alerta
   mostrarAlert: boolean = false; // Se inicia la alerta en false hasta que se muestre.
@@ -43,9 +47,11 @@ export class DestacadosComponent implements OnInit {
   }
 
   AgregarDestacados() {
+    this.loadingM = true;
     this.serv_des.guardarDestacados(this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
         if ( data === 'true') {
+          this.loadingM = false;
           this.Modal = false;
           this.limpiarDatos();
           this.ObtenerDestacados();
@@ -54,9 +60,11 @@ export class DestacadosComponent implements OnInit {
           this.mostrarAlert = true;
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else{
+          this.loadingM = false;
           this.Modal = false;
           this.limpiarDatos();
-          this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
+          this.ObtenerDestacados();
+          this.sms = 'Imagen ya éxiste para un articulo';
           this.ColorAlert = 'alert-danger';
           this.mostrarAlert = true;
           setTimeout( () => this.mostrarAlert = false, 4000);
@@ -64,12 +72,12 @@ export class DestacadosComponent implements OnInit {
       });
   }
 
-  limpiarDatos(){
+  limpiarDatos() {
     this.titulo = '';
     this.descripcion = '';
   }
 
-  ObtenerDestacados(){
+  ObtenerDestacados() {
     this.Destacados = [];
     let fts;
     let destacados;
@@ -85,6 +93,7 @@ export class DestacadosComponent implements OnInit {
               destacados = new DestacadosItems(res.id_d, res.titulo, res.descripcion, res.fecha, this.Imagenes);
               this.Destacados.push(destacados);
               this.Imagenes = [];
+              this.loadingPr = false;
             });
         }
       });
@@ -117,11 +126,19 @@ export class DestacadosComponent implements OnInit {
     this.ModalAEditDest = true;
   }
 
+  cerrarModalEditarDestacados(){
+    this.titulo = '';
+    this.descripcion = '';
+    this.ModalAEditDest = false;
+  }
+
   EditarDestacads(){
+    this.loadingM = true;
     console.log(this.id_d);
     this.serv_des.editarDestacados(this.id_d, this.titulo, this.descripcion)
       .subscribe(data => {
         if (data.mensaje == true){
+          this.loadingM= false;
           this.ModalAEditDest = false;
           this.sms = 'Evento editado';
           this.ColorAlert = 'alert-success';
@@ -129,6 +146,7 @@ export class DestacadosComponent implements OnInit {
           this.ObtenerDestacados();
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else{
+          this.loadingM = false;
           this.ModalAEditDest = false;
           this.sms = 'Ocurrio un error porfavor intente mas tarde';
           this.ColorAlert = 'alert-danger';

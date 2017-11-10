@@ -1,8 +1,13 @@
-<div *ngIf="mostrarAlert" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
+<div *ngIf="loadingPr" class="loadingPr">
+  <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+  <span class="sr-only">Loading...</span>
+</div>
+
+<div *ngIf="mostrarAlert && !loadingPr" class="alert contain-alert" role="alert" [ngClass]="ColorAlert">
   <div class="letraAlert">{{sms}}</div>
 </div>
 
-<div class="nuevo" (click)="Modal=!Modal" >
+<div class="nuevo" (click)="Modal=!Modal" *ngIf="!loadingPr" >
   +
   <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
 </div>
@@ -46,23 +51,23 @@
 
 <!--Modal de addDescatados-->
 <div *ngIf="Modal" class="modal bd-example-modal-lg" >
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <button type="button" class="close" (click)="Modal=!Modal" aria-label="Close">
+      <div *ngIf="loadingM" class="loadingM">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button  *ngIf="!loadingM" type="button" class="close" (click)="Modal=!Modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!loadingM">
         <div class="row">
-          <div class="col-md-4">
-            <h3>Seleccione Una img</h3>
+          <div class="col-md-12" style="margin-bottom:40px">
+            <h4>Seleccione Una img</h4>
             <input type="file" (change)="fileEvent($event)" class="form-control-file">
-            <!--<input type="file" class="form-control-file" [(ngModel)]="archivo">-->
-          </div>
-          <div class="col-md-8" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>
               <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
               <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-
               <button type="button" class="btn btn-success"
                       [disabled]="!forma.valid "
                       (click)="AgregarDestacados()">
@@ -95,10 +100,14 @@
 <div *ngIf="ModalAEditDest" class="modal bd-example-modal-lg" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <button type="button" class="close" (click)="ModalAEditDest=!ModalAEditDest" aria-label="Close">
+      <div *ngIf="loadingM" class="loadingM">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button *ngIf="!loadingM" type="button" class="close" (click)="cerrarModalEditarDestacados()" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!loadingM">
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>

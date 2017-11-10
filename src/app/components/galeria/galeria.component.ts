@@ -13,6 +13,9 @@ import {forEach} from '@angular/router/src/utils/collection';
 })
 export class GaleriaComponent  {
 
+  loadingPr:boolean = true ;
+  loadingM:boolean = false;
+
   titulo:string;
   descripcion:string;
 
@@ -106,6 +109,7 @@ export class GaleriaComponent  {
               }
               galeria = new GaleriaItems(res.id_g, res.titulo, res.descripcion,  this.Imagenes);
               this.Galeria.push(galeria);
+              this.loadingPr = false;
               this.Imagenes = [];
             });
         }
@@ -198,9 +202,11 @@ export class GaleriaComponent  {
   }
 
   EditarEvento(){
+    this.loadingM = true;
     this._cargaImagenes.editarEvento(this.idGaleria, this.titulo, this.descripcion)
       .subscribe(data => {
         if (data.mensaje == true){
+          this.loadingM= false;
           this.ModalAEditEvento = false;
           this.sms = 'Evento editado';
           this.ColorAlert = 'alert-success';
