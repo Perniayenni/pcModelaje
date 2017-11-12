@@ -144,9 +144,11 @@ export class ModelosComponent implements OnInit {
   }
 
   EditarModelo(){
+    this.loadingM= true;
     this.servMod.editarModelos(this.id_m, this.nombre, this.nivel, this.descripcion)
       .subscribe(data => {
         if (data.mensaje == true){
+          this.loadingM= false;
           this.ModalAEditMod = false;
           this.sms = 'Modelo editada';
           this.ColorAlert = 'alert-success';
@@ -155,6 +157,7 @@ export class ModelosComponent implements OnInit {
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else{
           this.ModalAEditMod = false;
+          this.loadingM= false;
           this.sms = 'Ocurrio un error porfavor intente mas tarde';
           this.ColorAlert = 'alert-danger';
           this.mostrarAlert = true;
@@ -162,5 +165,13 @@ export class ModelosComponent implements OnInit {
         }
 
       });
+  }
+
+  CerrarModalEdita(){
+    this.ModalAEditMod= false;
+    this.nombre = '';
+    this.nivel = '';
+    this.descripcion = '';
+    this.archivos = undefined;
   }
 }

@@ -10,7 +10,7 @@
 
     <div *ngIf="!loadingPr" class="nuevo" (click)="Modal=!Modal" >
       <span>Agregar</span>
-      +
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>
     <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
     </div>
 
@@ -23,15 +23,21 @@
         <div class="contenTitulo ">
           <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
           <div class="boton">
-            <button type="button" class="btn btnColorColorGE2" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
-            <button type="button" class="btn btnColorColorGE2" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>
+            <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
+               (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)"></i>
+            <i class="fa fa-trash-o cursor icosDes" aria-hidden="true"
+               (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)"></i>
+
+          <!--  <button type="button" class="btn btnNEgro" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
+            <button type="button" class="btn btnNEgro" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>-->
           </div>
         </div>
 
         <div class="contentDescrip">
           <div class="titulo">{{datos.descripcion}}</div>
           <div class="boton">
-            <button type="button" class="btn btnColorColorGE" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>
+            <i class="fa fa-plus cursor icosDes" aria-hidden="true" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)"></i>
+            <!--<button type="button" class="btn btnRojo" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>-->
           </div>
         </div>
         <div class="contenImgs">

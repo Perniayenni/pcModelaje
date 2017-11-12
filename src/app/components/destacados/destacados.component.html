@@ -8,14 +8,13 @@
 </div>
 
 <div class="nuevo" (click)="Modal=!Modal" *ngIf="!loadingPr" >
-  +
-  <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i>-->
+  <span>Agregar</span>
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
 </div>
 
 <div class="row">
   <div class="col-md-12" *ngFor="let datos of Destacados let idxDes = index">
     <div class=" container">
-
       <div class="contentDestacados">
         <div class="row">
           <div class="col-md-4">
@@ -23,7 +22,7 @@
               <div *ngIf="img.isVisible" class="EditarImg">
                 Click para Editar la imagen
               </div>
-              <img  [src]="img.url" class="img-fluid cursor"
+              <img  [src]="img.url" class="imgDes cursor"
                     (click)="AbrirlModalEditarImgDes(datos.id_d)"
                     (mouseover)="img.isVisible=true" (mouseout)="img.isVisible=false" >
             </div>
@@ -31,14 +30,14 @@
           <div class="col-md-8">
             <div class="contGraDestacados">
                 <div class="col-md-12">
-                  <div class="contentElEdDestacados">
-                    <i class="fa fa-pencil-square-o cursor" aria-hidden="true"
-                       (click)="AbrirlModalEditarDestacados(datos.id_d, datos.titulo, datos.descripcion)"></i>
-                    <i class="fa fa-trash-o cursor" aria-hidden="true"
-                       (click)="AbrirModalEliminard(datos.id_d, idxDes)"></i>
-                  </div>
                   <div class="conteTituloDestacados">
-                    <h3>{{ datos.titulo }}</h3>
+                   <div class="conTi"><h3>{{ datos.titulo }}</h3></div>
+                    <div class="contentElEdDestacados">
+                      <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
+                         (click)="AbrirlModalEditarDestacados(datos.id_d, datos.titulo, datos.descripcion)"></i>
+                      <i class="fa fa-trash-o cursor icosDes" aria-hidden="true"
+                         (click)="AbrirModalEliminard(datos.id_d, idxDes)"></i>
+                    </div>
                   </div>
                   <div class="conteDescripcionDestacados">
                     {{ datos.descripcion }}
