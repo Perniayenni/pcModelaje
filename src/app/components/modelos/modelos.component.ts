@@ -20,6 +20,9 @@ export class ModelosComponent implements OnInit {
   ModalEliminar: boolean = false;
   ModalAEditMod:boolean = false;
 
+  loadingPr:boolean= true;
+  loadingM:boolean = false;
+
   Nivel = [
     'Joven',
     'Adulto'
@@ -48,31 +51,43 @@ export class ModelosComponent implements OnInit {
   }
 
   AgregarModelo(){
-    this.servMod.GuardarModelos(this.nombre, this.nivel, this.descripcion, this.archivos)
-      .subscribe(data => {
-        if ( data === 'true') {
-          this.Modal = false;
-          this.limpiarDatos();
-          this.obtenerModelos();
-          this.sms = 'Modelo guardada';
-          this.ColorAlert = 'alert-success';
-          this.mostrarAlert = true;
-          setTimeout( () => this.mostrarAlert = false, 4000);
-        }else{
-          this.Modal = false;
-          this.limpiarDatos();
-          this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
-          this.ColorAlert = 'alert-danger';
-          this.mostrarAlert = true;
-          setTimeout( () => this.mostrarAlert = false, 4000);
-        }
-      });
+    if (this.archivos === undefined){
+      this.sms = 'Debe ingresar una imagen';
+      this.ColorAlert = 'alert-danger';
+      this.mostrarAlert = true;
+      setTimeout( () => this.mostrarAlert = false, 3000);
+    }else{
+      this.loadingM = true;
+      this.servMod.GuardarModelos(this.nombre, this.nivel, this.descripcion, this.archivos)
+        .subscribe(data => {
+          if ( data === 'true') {
+            this.loadingM = false;
+            this.Modal = false;
+            this.limpiarDatos();
+            this.obtenerModelos();
+            this.sms = 'Modelo guardada';
+            this.ColorAlert = 'alert-success';
+            this.mostrarAlert = true;
+            setTimeout( () => this.mostrarAlert = false, 4000);
+          }else{
+            this.loadingM = false;
+            this.Modal = false;
+            this.limpiarDatos();
+            this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
+            this.ColorAlert = 'alert-danger';
+            this.mostrarAlert = true;
+            setTimeout( () => this.mostrarAlert = false, 4000);
+          }
+        });
+
+    }
   }
 
   limpiarDatos(){
     this.nombre = '';
     this.nivel = '';
     this.descripcion = '';
+    this.archivos = undefined;
   }
 
   obtenerModelos() {
@@ -92,6 +107,7 @@ export class ModelosComponent implements OnInit {
               modelos = new ModelosItems(res.id_m, res.nombreCompleto, res.descripcion, res.nivel, this.Imagenes);
               this.Modelos.push(modelos);
               this.Imagenes = [];
+              this.loadingPr = false;
             });
         }
         console.log(this.Modelos);

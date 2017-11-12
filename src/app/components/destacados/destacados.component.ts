@@ -14,6 +14,8 @@ export class DestacadosComponent implements OnInit {
   loadingPr:boolean = true ;
   loadingM:boolean = false;
 
+  VerEquiz:boolean = false;
+
   // Alert
   sms: string = ''; // Mensaje de Alerta
   mostrarAlert: boolean = false; // Se inicia la alerta en false hasta que se muestre.
@@ -23,6 +25,7 @@ export class DestacadosComponent implements OnInit {
   Modal: boolean = false;
   ModalEliminar: boolean = false;
   ModalAEditDest: boolean = false;
+  ModalAEditarImgDes: boolean = false;
 
   titulo: string;
   descripcion: string;
@@ -155,5 +158,21 @@ export class DestacadosComponent implements OnInit {
         }
 
       });
+  }
+
+  AbrirlModalEditarImgDes(id){
+    this.id_d = id;
+    this.ModalAEditarImgDes = true;
+  }
+
+  EditarImggenDestaca() {
+    if (this.archivos === undefined){
+      this.sms = 'Debe ingresar un archivo';
+      this.ColorAlert = 'alert-danger';
+      this.mostrarAlert = true;
+      setTimeout( () => this.mostrarAlert = false, 3000);
+    }
+    console.log(this.id_d);
+    console.log(this.archivos);
   }
 }

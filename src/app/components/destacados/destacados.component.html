@@ -20,7 +20,12 @@
         <div class="row">
           <div class="col-md-4">
             <div  class="contentImgDestacados" *ngFor="let img of datos.fotos let i = index">
-              <img  [src]="img.url" class="img-fluid" >
+              <div *ngIf="img.isVisible" class="EditarImg">
+                Click para Editar la imagen
+              </div>
+              <img  [src]="img.url" class="img-fluid cursor"
+                    (click)="AbrirlModalEditarImgDes(datos.id_d)"
+                    (mouseover)="img.isVisible=true" (mouseout)="img.isVisible=false" >
             </div>
           </div>
           <div class="col-md-8">
@@ -117,6 +122,37 @@
               <button type="button" class="btn btn-success"
                       [disabled]="!forma.valid "
                       (click)="EditarDestacads()">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de EditarImgDescatados-->
+<div *ngIf="ModalAEditarImgDes" class="modal bd-example-modal-lg" >
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+      <div *ngIf="loadingM" class="loadingM">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button *ngIf="!loadingM" type="button" class="close" (click)="ModalAEditarImgDes=!ModalAEditarImgDes" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body" *ngIf="!loadingM">
+        <div class="row">
+          <div class="col-md-12">
+            <form  #forma="ngForm" novalidate>
+              <h4>Seleccione Una img</h4>
+              <input type="file" (change)="fileEvent($event)" class="form-control-file">
+              <button type="button" class="btn btn-success btn-block"
+                      (click)="EditarImggenDestaca()"
+                      [disabled]=" !forma.valid ">
                 Enviar
               </button>
             </form>

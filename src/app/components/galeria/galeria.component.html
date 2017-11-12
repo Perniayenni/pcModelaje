@@ -38,8 +38,13 @@
           <div class="col-md-12">
             <div class="card-columns">
               <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
-                <div class="EliminarImg" (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)">X</div>
-                <img  [src]="img.url" class="img" >
+                <div *ngIf="img.isVisible" class="EliminarImg1">
+                 Haga click para Eliminar Imagen
+                </div>
+                <img  [src]="img.url" class="img"
+                      (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)"
+                      (mouseover)="img.isVisible=true"
+                      (mouseout)="img.isVisible=false" >
               </div>
             </div>
           </div>
@@ -225,7 +230,7 @@
           <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
           <span class="sr-only">Loading...</span>
         </div>
-        <button *ngIf="!loadingM" type="button" class="close" (click)="ModalAEditEvento=!ModalAEditEvento" aria-label="Close">
+        <button *ngIf="!loadingM" type="button" class="close" (click)="CerrarModaladdEvento()" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body" *ngIf="!loadingM">

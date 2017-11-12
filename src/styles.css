@@ -62,6 +62,7 @@
 .img{
   width: 300px;
   height: 300px;
+  cursor: pointer;
 }
 
 .nuevo{
@@ -95,6 +96,17 @@
   margin-left: 20px;
   text-align: right;
 }
+
+.EliminarImg1{
+  position: absolute;
+  margin-bottom: -10px;
+  color:#c52d2f;
+}
+.EditarImg{
+  color:#c52d2f;
+  text-align: center;
+}
+
 
 .contenGaleria{
   width: 99%;

@@ -32,6 +32,8 @@ export class GaleriaComponent  {
   ModalEliminar:boolean =false;
   ModalAEditEvento:boolean= false;
 
+  VerEquizImg:boolean = false;
+
   tituloAddImg:string;
   id_gAddImg:string;
 
@@ -91,6 +93,12 @@ export class GaleriaComponent  {
   limpiarArchivos() {
     this.archivos = [];
     this.permiteCargar = true;
+  }
+
+  CerrarModaladdEvento(){
+    this.titulo = '';
+    this.descripcion = '';
+    this.ModalAEditEvento = false;
   }
 
   cargarGaleria() {
