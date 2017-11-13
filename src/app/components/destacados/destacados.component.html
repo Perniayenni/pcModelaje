@@ -22,7 +22,7 @@
               <div *ngIf="img.isVisible" class="EditarImg">
                 Click para Editar la imagen
               </div>
-              <img  [src]="img.url" class="imgDes cursor"
+              <img  [src]="img.url" class="img-fluid cursor"
                     (click)="AbrirlModalEditarImgDes(datos.id_d, img.id_img)"
                     (mouseover)="img.isVisible=true" (mouseout)="img.isVisible=false" >
             </div>

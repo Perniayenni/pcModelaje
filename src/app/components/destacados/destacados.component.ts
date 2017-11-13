@@ -54,6 +54,7 @@ export class DestacadosComponent implements OnInit {
     this.loadingM = true;
     this.serv_des.guardarDestacados(this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
+        console.log(data);
         if ( data === 'true') {
           this.loadingM = false;
           this.Modal = false;
@@ -79,7 +80,7 @@ export class DestacadosComponent implements OnInit {
   limpiarDatos() {
     this.titulo = '';
     this.descripcion = '';
-    this.archivos = [];
+    this.archivos = undefined;
   }
 
   ObtenerDestacados() {
@@ -136,7 +137,7 @@ export class DestacadosComponent implements OnInit {
     this.ModalAEditDest = true;
   }
 
-  cerrarModalEditarDestacados(){
+  cerrarModalEditarDestacados() {
     this.titulo = '';
     this.descripcion = '';
     this.ModalAEditDest = false;

@@ -62,10 +62,12 @@ export class GaleriaComponent  {
 
   cargarImagenesGaleria() {
     this.permiteCargar = false;
+    this.loadingM = true;
     this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
       .subscribe(data => {
         if ( data === 'true') {
           this.Modal = false;
+          this.loadingM = false;
           this.limpiarArchivos();
           this.limpiarDatos();
           this.cargarGaleria();
@@ -74,6 +76,7 @@ export class GaleriaComponent  {
           this.mostrarAlert = true;
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else{
+          this.loadingM = false;
           this.Modal = false;
           this.limpiarArchivos();
           this.limpiarDatos();
@@ -135,10 +138,13 @@ export class GaleriaComponent  {
   }
 
   cargarMasImagenes(){
+    this.loadingM = true;
     this.permiteCargar = false;
     this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.tituloAddImg, this.archivos)
       .subscribe(data => {
+        console.log(data);
         if (data === 'true') {
+          this.loadingM = false;
           this.ModalAddImg = false;
           this.limpiarArchivos();
           this.limpiarDatos();
@@ -148,6 +154,7 @@ export class GaleriaComponent  {
           this.mostrarAlert = true;
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else {
+          this.loadingM = false;
           this.ModalAddImg = false;
           this.limpiarArchivos();
           this.limpiarDatos();

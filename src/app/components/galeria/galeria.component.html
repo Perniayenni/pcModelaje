@@ -16,10 +16,9 @@
 
 
 <!--PRimera vista-->
-  <div class="col-md-12" *ngFor="let datos of Galeria let ig = index">
+  <div class="col-md-12" >
     <div class=" container">
-
-      <div class="contenGaleria ">
+      <div class="contenGaleria " *ngFor="let datos of Galeria let ig = index">
         <div class="contenTitulo ">
           <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
           <div class="boton">
@@ -57,7 +56,6 @@
         </div>
       </div>
     </div>
-
   </div>
 
 
@@ -81,10 +79,14 @@
   <div *ngIf="Modal" class="modal bd-example-modal-lg" >
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-        <button type="button" class="close" (click)="Modal=!Modal" aria-label="Close">
+        <div *ngIf="loadingM" class="loadingM">
+          <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </div>
+        <button type="button" class="close" (click)="Modal=!Modal" aria-label="Close"  *ngIf="!loadingM">
           <span aria-hidden="true">&times;</span>
         </button>
-        <div class="modal-body">
+        <div class="modal-body"  *ngIf="!loadingM">
           <div class="row">
             <div class="col-md-5">
               SELECCIONE LAS IMAGENES
@@ -122,7 +124,6 @@
                 <tr>
                   <th>Nombre</th>
                   <th>Tamaño</th>
-                  <th>Progreso</th>
                 </tr>
                 </thead>
 
@@ -133,13 +134,6 @@
                   </td>
                   <td>
                     {{ archivo.archivo.size / 1024 / 1024 | number:'.2' }}MB
-                  </td>
-                  <td>
-
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
-                    </div>
-
                   </td>
                 </tr>
                 </tbody>
@@ -157,10 +151,14 @@
   <div *ngIf="ModalAddImg" class="modal bd-example-modal-lg" >
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <button type="button" class="close" (click)="ModalAddImg=!ModalAddImg" aria-label="Close">
+      <div *ngIf="loadingM" class="loadingM">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button type="button" class="close" (click)="ModalAddImg=!ModalAddImg" aria-label="Close" *ngIf="!loadingM">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="modal-body">
+      <div class="modal-body" *ngIf="!loadingM">
         <div class="row">
           <div class="col-md-5">
             SELECCIONE LAS IMAGENES
@@ -194,7 +192,6 @@
               <tr>
                 <th>Nombre</th>
                 <th>Tamaño</th>
-                <th>Progreso</th>
               </tr>
               </thead>
 
@@ -206,18 +203,9 @@
                 <td>
                   {{ archivo.archivo.size / 1024 / 1024 | number:'.2' }}MB
                 </td>
-                <td>
-
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': archivo.progreso + '%' }"></div>
-                  </div>
-
-                </td>
               </tr>
               </tbody>
-
             </table>
-
           </div>
         </div>
       </div>

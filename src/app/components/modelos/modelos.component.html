@@ -21,7 +21,13 @@
         <i class="fa fa-trash-o cursor icosMo" aria-hidden="true" (click)="AbrirModalEli(modelo.id_m, idxMo)"></i>
       </div>
       <div class="ContentImgModelos"  *ngFor="let img of modelo.fotos let i = index">
-        <img class="card-img-top imgModel" [src]="img.url" [alt]="modelo.nombre">
+        <div *ngIf="img.isVisible" class="EditarImg">
+          Click para Editar la imagen
+        </div>
+        <img (mouseover)="img.isVisible=true"
+             (mouseout)="img.isVisible=false"
+             (click)="AbrirlModalEditarImgMod(modelo.id_m, img.id_img)"
+             class="card-img-top" [src]="img.url" [alt]="modelo.nombre">
       </div>
       <div class="contentNombreModelo">
         {{ modelo.nombre }}
@@ -125,6 +131,38 @@
               <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "
                       (click)="EditarModelo()">
+                Enviar
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Modal de EditarImgModelos-->
+<div *ngIf="ModalAEditarImgMod" class="modal bd-example-modal-lg" >
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+
+      <div *ngIf="loadingM" class="loadingM">
+        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+      <button *ngIf="!loadingM" type="button" class="close" (click)="ModalAEditarImgMod=!ModalAEditarImgMod" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body" *ngIf="!loadingM">
+        <div class="row">
+          <div class="col-md-12">
+            <form  #forma="ngForm" novalidate>
+              SELECCIONE UNA IMAGEN
+              <input type="file" (change)="fileEvent($event)" class="form-control-file">
+              <br>
+              <button type="button" class="btn btnRojo btn-block"
+                      (click)="EditarImggenModelos()"
+                      [disabled]=" !forma.valid ">
                 Enviar
               </button>
             </form>

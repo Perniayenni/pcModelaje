@@ -19,6 +19,7 @@ export class ModelosComponent implements OnInit {
   Modal: boolean = false;
   ModalEliminar: boolean = false;
   ModalAEditMod:boolean = false;
+  ModalAEditarImgMod:boolean = false;
 
   loadingPr:boolean= true;
   loadingM:boolean = false;
@@ -38,6 +39,7 @@ export class ModelosComponent implements OnInit {
   tituloEliminar:string;
   id_m:number;
   idxModelos:number;
+  id_img:number;
 
   constructor(private servMod: ModelosService) {
     this.obtenerModelos();
@@ -177,5 +179,35 @@ export class ModelosComponent implements OnInit {
     this.nivel = '';
     this.descripcion = '';
     this.archivos = undefined;
+  }
+
+  AbrirlModalEditarImgMod(id, idimg){
+    this.id_m = id;
+    this.id_img = idimg;
+    this.ModalAEditarImgMod = true;
+  }
+
+  EditarImggenModelos(){
+    if (this.archivos === undefined) {
+      this.sms = 'Debe ingresar un archivo';
+      this.ColorAlert = 'alert-danger';
+      this.mostrarAlert = true;
+      setTimeout(() => this.mostrarAlert = false, 3000);
+    } else {
+      this.loadingM = true;
+      this.servMod.editarImgMod(this.id_m, this.id_img, this.archivos)
+        .subscribe(data => {
+          if(data === 'true'){
+            this.loadingM = false;
+            this.ModalAEditarImgMod = false;
+            this.sms = 'Imagen editada';
+            this.ColorAlert = 'alert-success';
+            this.mostrarAlert = true;
+            this.limpiarDatos();
+            this.obtenerModelos();
+            setTimeout( () => this.mostrarAlert = false, 4000);
+          }
+        });
+    }
   }
 }

@@ -8,6 +8,7 @@ export class ModelosService {
 
   urlModelos:string = 'http://apimodelaje.ourproject.cl/public/modelos';
   ImgsUrl:string = 'http://apimodelaje.ourproject.cl/public/imgs/';
+  EditImgModelos:string = 'http://apimodelaje.ourproject.cl/public/EditImgModelos';
 
   constructor(private http: Http) { }
 
@@ -75,5 +76,33 @@ export class ModelosService {
       .map( res => {
         return res.json();
       });
+  }
+
+  editarImgMod(id, idimg, archivos){
+
+    return Observable.create(observer => {
+
+      let formData = new FormData();
+      formData.append('id_d', id);
+      formData.append('id_img', idimg);
+      for(let nar of archivos){
+        formData.append('file[]', nar);
+      }
+
+      let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+      xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
+          observer.next(this.responseText);
+          observer.complete();
+        }
+      });
+
+      xhr.open('POST', this.EditImgModelos, true);
+      xhr.setRequestHeader('enctype', 'multipart/form-data');
+      xhr.setRequestHeader('cache-control', 'no-cache');
+      xhr.send(formData);
+    });
   }
 }
