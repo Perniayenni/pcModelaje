@@ -37,6 +37,7 @@ export class DestacadosComponent implements OnInit {
   tituloEliminar:string;
   id_d:number;
   idxDestacados:number;
+  id_img:number;
 
   constructor(public serv_des: DestacadosService) {
     this.ObtenerDestacados();
@@ -78,6 +79,7 @@ export class DestacadosComponent implements OnInit {
   limpiarDatos() {
     this.titulo = '';
     this.descripcion = '';
+    this.archivos = [];
   }
 
   ObtenerDestacados() {
@@ -165,19 +167,33 @@ export class DestacadosComponent implements OnInit {
       });
   }
 
-  AbrirlModalEditarImgDes(id){
+  AbrirlModalEditarImgDes(id, idimg){
     this.id_d = id;
+    this.id_img = idimg;
     this.ModalAEditarImgDes = true;
   }
 
   EditarImggenDestaca() {
-    if (this.archivos === undefined){
+    if (this.archivos === undefined) {
       this.sms = 'Debe ingresar un archivo';
       this.ColorAlert = 'alert-danger';
       this.mostrarAlert = true;
-      setTimeout( () => this.mostrarAlert = false, 3000);
+      setTimeout(() => this.mostrarAlert = false, 3000);
+    } else {
+      this.loadingM = true;
+      this.serv_des.editarImgDes(this.id_d, this.id_img, this.archivos)
+        .subscribe(data => {
+          if(data == 'true'){
+            this.loadingM= false;
+            this.ModalAEditarImgDes = false;
+            this.sms = 'Imagen editada';
+            this.ColorAlert = 'alert-success';
+            this.mostrarAlert = true;
+            this.limpiarDatos();
+            this.ObtenerDestacados();
+            setTimeout( () => this.mostrarAlert = false, 4000);
+          }
+        });
     }
-    console.log(this.id_d);
-    console.log(this.archivos);
   }
 }

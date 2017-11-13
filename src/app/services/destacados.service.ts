@@ -10,6 +10,7 @@ export class DestacadosService {
   fechaActual:string = new Date().toJSON().slice(0, 10);
   urlDestacados:string = 'http://apimodelaje.ourproject.cl/public/destacados';
   ImgsUrl:string = 'http://apimodelaje.ourproject.cl/public/imgs/';
+  EditImgDestacados:string = 'http://apimodelaje.ourproject.cl/public/EditImgDestacados';
 
   constructor(private http: Http) { }
 
@@ -74,12 +75,38 @@ export class DestacadosService {
       'Content-Type': 'application/json'
     });
 
-    let url = this.urlDestacados + '/' + id;
-
-    return this.http.put( url, body, { headers })
+    return this.http.put( this.EditImgDestacados, body, { headers })
       .map( res => {
         return res.json();
       });
+  }
+
+  editarImgDes(id, idimg, archivos){
+
+    return Observable.create(observer => {
+
+      let formData = new FormData();
+      formData.append('id_d', id);
+      formData.append('id_img', idimg);
+      for(let nar of archivos){
+        formData.append('file[]', nar);
+      }
+
+      let xhr: XMLHttpRequest = new XMLHttpRequest();
+
+      xhr.addEventListener('readystatechange', function () {
+        if (this.readyState === 4) {
+          console.log(this.responseText);
+          observer.next(this.responseText);
+          observer.complete();
+        }
+      });
+
+      xhr.open('POST', this.EditImgDestacados, true);
+      xhr.setRequestHeader('enctype', 'multipart/form-data');
+      xhr.setRequestHeader('cache-control', 'no-cache');
+      xhr.send(formData);
+    });
   }
 
 }

@@ -50,12 +50,12 @@
       <div class="modal-body" *ngIf="!loadingM">
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
-            <h3>Seleccione una foto</h3>
+            SELECCIONE UNA IMAGEN
             <input type="file" (change)="fileEvent($event)" class="form-control-file">
             <!--<input type="file" class="form-control-file" [(ngModel)]="archivo">-->
             <form  #forma="ngForm" novalidate>
-              <h4>Nombre</h4>  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
-              <h4>Nivel</h4>
+             NOMBRE  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+             NIVEL
               <select  required style="width: 100%"
                        class="custom-select" [(ngModel)]="nivel"
                        name="nivel">
@@ -64,9 +64,9 @@
                         [value]="nvel">
                   {{nvel}}</option>
               </select>
-              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-
-              <button type="button" class="btn btn-success"
+              DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              <br>
+              <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "
                       (click)="AgregarModelo()">
                 Enviar
@@ -87,8 +87,8 @@
         <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
       </div>
       <div class="modal-footer">
-        <button  type="button" (click)="EliminarModelos()"  class="btn btn-success">Si</button>
-        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+        <button  type="button" (click)="EliminarModelos()"  class="btn btnRojo">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btnNEgro">No</button>
       </div>
     </div>
   </div>
@@ -109,8 +109,8 @@
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>
-              <h4>Nombre Completo</h4>  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
-              <h4>Nivel</h4>
+              NOMBRE COMPLETO  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+              NIVEL
               <select  required style="width: 100%"
                        class="custom-select" [(ngModel)]="nivel"
                        name="nivel">
@@ -120,9 +120,9 @@
                   {{nvel}}</option>
               </select>
 
-              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-
-              <button type="button" class="btn btn-success"
+              DESCRIPCION  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              <br>
+              <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "
                       (click)="EditarModelo()">
                 Enviar
