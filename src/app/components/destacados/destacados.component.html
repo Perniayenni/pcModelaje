@@ -12,7 +12,7 @@
   <i class="fa fa-plus-circle" aria-hidden="true"></i>
 </div>
 
-<div class="row">
+<!--PRimera vista-->
   <div class="col-md-12" *ngFor="let datos of Destacados let idxDes = index">
     <div class=" container">
       <div class="contentDestacados">
@@ -49,9 +49,7 @@
 
       </div>
     </div>
-
   </div>
-</div>
 
 <!--Modal de addDescatados-->
 <div *ngIf="Modal" class="modal bd-example-modal-lg" >
@@ -67,12 +65,13 @@
       <div class="modal-body" *ngIf="!loadingM">
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
-            <h4>Seleccione Una img</h4>
-            <input type="file" (change)="fileEvent($event)" class="form-control-file">
+          SELECCIONE UNA IMG
+            <input type="file" (change)="fileEvent($event)" class="inputFile">
             <form  #forma="ngForm" novalidate>
-              <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-              <button type="button" class="btn btn-success"
+             TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              <br>
+              <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "
                       (click)="AgregarDestacados()">
                 Enviar
@@ -93,8 +92,8 @@
         <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
       </div>
       <div class="modal-footer">
-        <button  type="button" (click)="EliminarDestacados()"  class="btn btn-success">Si</button>
-        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+        <button  type="button" (click)="EliminarDestacados()"  class="btn btnRojo">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btnNEgro">No</button>
       </div>
     </div>
   </div>
@@ -115,10 +114,10 @@
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>
-              <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-
-              <button type="button" class="btn btn-success"
+             TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              DESCRIPCIÓN <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              <br>
+              <button type="button" class="btn btnRojo"
                       [disabled]="!forma.valid "
                       (click)="EditarDestacads()">
                 Enviar
@@ -147,9 +146,10 @@
         <div class="row">
           <div class="col-md-12">
             <form  #forma="ngForm" novalidate>
-              <h4>Seleccione Una img</h4>
+             SELECCIONE UNA IMAGEN
               <input type="file" (change)="fileEvent($event)" class="form-control-file">
-              <button type="button" class="btn btn-success btn-block"
+              <br>
+              <button type="button" class="btn btnRojo btn-block"
                       (click)="EditarImggenDestaca()"
                       [disabled]=" !forma.valid ">
                 Enviar

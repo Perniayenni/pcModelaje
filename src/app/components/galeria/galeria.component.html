@@ -15,7 +15,7 @@
     </div>
 
 
-<div class="row">
+<!--PRimera vista-->
   <div class="col-md-12" *ngFor="let datos of Galeria let ig = index">
     <div class=" container">
 
@@ -23,21 +23,21 @@
         <div class="contenTitulo ">
           <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
           <div class="boton">
-            <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
-               (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)"></i>
-            <i class="fa fa-trash-o cursor icosDes" aria-hidden="true"
-               (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)"></i>
+            <!--    <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
+                 (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)"></i>
+              <i class="fa fa-trash-o cursor icosDes" aria-hidden="true"
+                 (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)"></i>-->
 
-          <!--  <button type="button" class="btn btnNEgro" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
-            <button type="button" class="btn btnNEgro" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>-->
+            <button type="button" class="btn btnNEgro" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
+              <button type="button" class="btn btnNEgro" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>
           </div>
         </div>
 
         <div class="contentDescrip">
           <div class="titulo">{{datos.descripcion}}</div>
           <div class="boton">
-            <i class="fa fa-plus cursor icosDes" aria-hidden="true" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)"></i>
-            <!--<button type="button" class="btn btnRojo" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>-->
+            <!-- <i class="fa fa-plus cursor icosDes" aria-hidden="true" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)"></i>-->
+             <button type="button" class="btn btnRojo" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>
           </div>
         </div>
         <div class="contenImgs">
@@ -59,7 +59,6 @@
     </div>
 
   </div>
-</div>
 
 
 <!--Modal de Eliminar-->
@@ -70,9 +69,9 @@
         <h5 class="modal-title">¿ {{tituloEliminar}} ?</h5>
       </div>
       <div class="modal-footer">
-        <button *ngIf="TipoEventEliminar == 'evento'" (click)="EliminarEvento()"  type="button" class="btn btn-danger">Si</button>
-        <button  *ngIf="TipoEventEliminar != 'evento'" (click)="EliminarImg()"  type="button" class="btn btn-success">Si</button>
-        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btn-Warning">No</button>
+        <button *ngIf="TipoEventEliminar == 'evento'" (click)="EliminarEvento()"  type="button" class="btn btnRojo">Si</button>
+        <button  *ngIf="TipoEventEliminar != 'evento'" (click)="EliminarImg()"  type="button" class="btn btnRojo">Si</button>
+        <button (click)="ModalEliminar=!ModalEliminar" type="button" class="btn btnNEgro">No</button>
       </div>
     </div>
   </div>
@@ -88,7 +87,7 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-5">
-              <h3>Seleccione Imagenes</h3>
+              SELECCIONE LAS IMAGENES
 
               <div appNgDropFiles
                    [ngClass]="{ 'file-over': estaSobreDropZone }"
@@ -102,18 +101,18 @@
             </div>
             <div class="col-md-7" style="margin-bottom:40px">
               <form  #forma="ngForm" novalidate>
-              <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-              <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
 
-              <h4>Cargar Imagenes</h4>
+                <div>CARGAR IMAGENES</div>
 
-              <button type="button" class="btn btn-success"
+              <button type="button" class="btn btnRojo"
                       (click)="cargarImagenesGaleria()"
                       [disabled]="archivos.length == 0 || !permiteCargar || !forma.valid ">
                 Cargar a Galería
               </button>
 
-              <button type="button" class="btn btn-danger"
+              <button type="button" class="btn btnNEgro"
                       (click)="limpiarArchivos()">
                 Limpiar archivos
               </button>
@@ -164,8 +163,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-5">
-            <h3>Seleccione Imagenes</h3>
-
+            SELECCIONE LAS IMAGENES
             <div appNgDropFiles
                  [ngClass]="{ 'file-over': estaSobreDropZone }"
                  (archivoSobre)="archivoSobreDropZone($event)"
@@ -177,15 +175,15 @@
 
           </div>
           <div class="col-md-7" style="margin-bottom:40px">
-            <h4>Cargar Imagenes</h4>
+            <div>CARGAR IMAGENES</div>
 
-            <button type="button" class="btn btn-success"
+            <button type="button" class="btn btnRojo"
                     (click)="cargarMasImagenes()"
                     [disabled]="archivos.length == 0 || !permiteCargar">
               Cargar a Galería
             </button>
 
-            <button type="button" class="btn btn-danger"
+            <button type="button" class="btn btnNEgro"
                     (click)="limpiarArchivos()">
               Limpiar archivos
             </button>
@@ -243,10 +241,10 @@
           <div class="row">
             <div class="col-md-12">
               <form  #forma="ngForm" novalidate>
-                <h4>Título</h4>  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-                <h4>Descripción</h4>  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
-
-                <button type="button" class="btn btn-success btn-block"
+               TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+               DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+                <br>
+                <button type="button" class="btn btnRojo btn-block"
                         (click)="EditarEvento()"
                         [disabled]=" !forma.valid ">
                   Enviar

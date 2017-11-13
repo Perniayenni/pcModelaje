@@ -97,20 +97,24 @@ export class ModelosComponent implements OnInit {
     this.servMod.ObtenerModelos()
       .subscribe(data => {
         console.log(data);
-        for (let res of data){
-          this.servMod.obtener_imagenesModelo('Modelos', res.id_m)
-            .subscribe(data1 => {
-              for (let res1 of data1) {
-                fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
-                this.Imagenes.push(fts);
-              }
-              modelos = new ModelosItems(res.id_m, res.nombreCompleto, res.descripcion, res.nivel, this.Imagenes);
-              this.Modelos.push(modelos);
-              this.Imagenes = [];
-              this.loadingPr = false;
-            });
+        if (data != ''){
+          for (let res of data){
+            this.servMod.obtener_imagenesModelo('Modelos', res.id_m)
+              .subscribe(data1 => {
+                for (let res1 of data1) {
+                  fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
+                  this.Imagenes.push(fts);
+                }
+                modelos = new ModelosItems(res.id_m, res.nombreCompleto, res.descripcion, res.nivel, this.Imagenes);
+                this.Modelos.push(modelos);
+                this.Imagenes = [];
+                this.loadingPr = false;
+              });
+          }
+        }else{
+          this.loadingPr = false;
         }
-        console.log(this.Modelos);
+
       });
   }
 

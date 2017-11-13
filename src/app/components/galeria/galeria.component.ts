@@ -107,20 +107,24 @@ export class GaleriaComponent  {
     let fts;
     this._cargaImagenes.ObtenerGaleria()
       .subscribe(data => {
-        console.log(data);
-        for (let res of data){
-          this._cargaImagenes.cargar_imagenes('Galeria', res.id_g)
-            .subscribe(data1 => {
-              for (let res1 of data1) {
-                fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
-                this.Imagenes.push(fts);
-              }
-              galeria = new GaleriaItems(res.id_g, res.titulo, res.descripcion,  this.Imagenes);
-              this.Galeria.push(galeria);
-              this.loadingPr = false;
-              this.Imagenes = [];
-            });
+        if (data != ''){
+          for (let res of data){
+            this._cargaImagenes.cargar_imagenes('Galeria', res.id_g)
+              .subscribe(data1 => {
+                for (let res1 of data1) {
+                  fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
+                  this.Imagenes.push(fts);
+                }
+                galeria = new GaleriaItems(res.id_g, res.titulo, res.descripcion,  this.Imagenes);
+                this.Galeria.push(galeria);
+                this.loadingPr = false;
+                this.Imagenes = [];
+              });
+          }
+        }else{
+          this.loadingPr = false;
         }
+
       });
   }
 

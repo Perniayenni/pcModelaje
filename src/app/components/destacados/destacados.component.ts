@@ -86,19 +86,24 @@ export class DestacadosComponent implements OnInit {
     let destacados;
     this.serv_des.ObtenerDestacados()
       .subscribe(data => {
-        for (let res of data){
-          this.serv_des.obtener_imagenes('Destacados', res.id_d)
-            .subscribe(data1 => {
-              for (let res1 of data1) {
-                fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
-                this.Imagenes.push(fts);
-              }
-              destacados = new DestacadosItems(res.id_d, res.titulo, res.descripcion, res.fecha, this.Imagenes);
-              this.Destacados.push(destacados);
-              this.Imagenes = [];
-              this.loadingPr = false;
-            });
+        if (data != ''){
+          for (let res of data){
+            this.serv_des.obtener_imagenes('Destacados', res.id_d)
+              .subscribe(data1 => {
+                for (let res1 of data1) {
+                  fts = new Fotos (res1.id_img, res1.url, res1.ref, res1.id_g, res1.id_m, res1.id_d);
+                  this.Imagenes.push(fts);
+                }
+                destacados = new DestacadosItems(res.id_d, res.titulo, res.descripcion, res.fecha, this.Imagenes);
+                this.Destacados.push(destacados);
+                this.Imagenes = [];
+                this.loadingPr = false;
+              });
+          }
+        }else{
+          this.loadingPr = false;
         }
+
       });
   }
 
