@@ -40,22 +40,21 @@
           </div>
         </div>
         <div class="contenImgs">
-          <div class="col-md-12">
-            <ul>
-              <li *ngFor="let img of datos.fotos let i = index" class="liI">
-                <div class="contentImg">
-                  <div *ngIf="img.isVisible" class="EliminarImg1">
-                    Haga click para Eliminar Imagen
-                  </div>
-                  <img  [src]="img.url" class="img"
-                        (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)"
-                        (mouseover)="img.isVisible=true"
-                        (mouseout)="img.isVisible=false" >
-                </div>
+            <!-- <ul>
+               <li *ngFor="let img of datos.fotos let i = index" class="liI">
+                 <div class="contentImg">
+                   <div *ngIf="img.isVisible" class="EliminarImg1">
+                     Haga click para Eliminar Imagen
+                   </div>
+                   <img  [src]="img.url" class="img"
+                         (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)"
+                         (mouseover)="img.isVisible=true"
+                         (mouseout)="img.isVisible=false" >
+                 </div>
 
-              </li>
-            </ul>
-          <!--  <div class="card-columns">
+               </li>
+             </ul>-->
+
               <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
                 <div *ngIf="img.isVisible" class="EliminarImg1">
                  Haga click para Eliminar Imagen
@@ -65,8 +64,7 @@
                       (mouseover)="img.isVisible=true"
                       (mouseout)="img.isVisible=false" >
               </div>
-            </div>-->
-          </div>
+
         </div>
       </div>
     </div>
