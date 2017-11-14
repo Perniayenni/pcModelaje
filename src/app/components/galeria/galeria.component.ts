@@ -60,7 +60,7 @@ export class GaleriaComponent  {
   }
 
 
-  cargarImagenesGaleria() GA{
+  cargarImagenesGaleria(){
     this.permiteCargar = false;
     this.loadingM = true;
     this._cargaImagenes.guardarImg( this.titulo, this.descripcion, this.archivos)
