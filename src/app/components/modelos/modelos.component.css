@@ -71,3 +71,13 @@
 .custom-select{
   border: 1px solid #A64452 !important;
 }
+.ContentImgModelos span{
+  color: darkred;
+  font-size: 12px;
+  position: relative;
+  display: none;
+}
+
+.ContentImgModelos:hover span{
+  display: block;
+}

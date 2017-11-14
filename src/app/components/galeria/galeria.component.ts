@@ -80,6 +80,7 @@ export class GaleriaComponent  {
           this.Modal = false;
           this.limpiarArchivos();
           this.limpiarDatos();
+          this.cargarGaleria();
           this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
           this.ColorAlert = 'alert-danger';
           this.mostrarAlert = true;
@@ -158,6 +159,7 @@ export class GaleriaComponent  {
           this.ModalAddImg = false;
           this.limpiarArchivos();
           this.limpiarDatos();
+          this.cargarGaleria();
           this.sms = 'Ocurrio un error al subir los datos, intente de nuevo';
           this.ColorAlert = 'alert-danger';
           this.mostrarAlert = true;

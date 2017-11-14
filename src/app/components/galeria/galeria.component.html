@@ -56,13 +56,11 @@
              </ul>-->
 
               <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
-                <div *ngIf="img.isVisible" class="EliminarImg1">
-                 Haga click para Eliminar Imagen
-                </div>
+                <span>
+                 Click para Eliminar Imagen
+                </span>
                 <img  [src]="img.url" class="img"
-                      (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)"
-                      (mouseover)="img.isVisible=true"
-                      (mouseout)="img.isVisible=false" >
+                      (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)">
               </div>
 
         </div>
@@ -167,10 +165,10 @@
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
         <span class="sr-only">Loading...</span>
       </div>
-      <button type="button" class="close" (click)="ModalAddImg=!ModalAddImg" aria-label="Close" *ngIf="!loadingM">
+      <button  type="button" class="close" (click)="ModalAddImg=!ModalAddImg" aria-label="Close" *ngIf="!loadingM">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="modal-body" >
+      <div class="modal-body"  *ngIf="!loadingM"  >
         <div class="row">
           <div class="col-md-5">
             SELECCIONE LAS IMAGENES

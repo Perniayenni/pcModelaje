@@ -162,11 +162,22 @@ body{
 .contentImg{
   float: left;
   width:200px;
-  background: blue;
-  height: auto;
+  height: 280px;
   margin-left: 10px;
   padding: 5px;
   margin-top: 5px;
+  overflow: hidden;
+}
+
+.contentImg span{
+  color: darkred;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+  display: none;
+}
+.contentImg:hover span{
+  display: block;
 }
 
 .eliminarEvento{

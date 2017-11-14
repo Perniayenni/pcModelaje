@@ -19,12 +19,11 @@
         <div class="row">
           <div class="col-md-4">
             <div  class="contentImgDestacados" *ngFor="let img of datos.fotos let i = index">
-              <div *ngIf="img.isVisible" class="EditarImg">
-                Click para Editar la imagen
-              </div>
+               <span>
+                 Click para Editar Imagen
+                </span>
               <img  [src]="img.url" class="img-fluid cursor"
-                    (click)="AbrirlModalEditarImgDes(datos.id_d, img.id_img)"
-                    (mouseover)="img.isVisible=true" (mouseout)="img.isVisible=false" >
+                    (click)="AbrirlModalEditarImgDes(datos.id_d, img.id_img)">
             </div>
           </div>
           <div class="col-md-8">

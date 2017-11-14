@@ -21,12 +21,8 @@
         <i class="fa fa-trash-o cursor icosMo" aria-hidden="true" (click)="AbrirModalEli(modelo.id_m, idxMo)"></i>
       </div>
       <div class="ContentImgModelos"  *ngFor="let img of modelo.fotos let i = index">
-        <div *ngIf="img.isVisible" class="EditarImg">
-          Click para Editar la imagen
-        </div>
-        <img (mouseover)="img.isVisible=true"
-             (mouseout)="img.isVisible=false"
-             (click)="AbrirlModalEditarImgMod(modelo.id_m, img.id_img)"
+        <span>Click para Eliminar Imagen</span>
+        <img (click)="AbrirlModalEditarImgMod(modelo.id_m, img.id_img)"
              class="card-img-top" [src]="img.url" [alt]="modelo.nombre">
       </div>
       <div class="contentNombreModelo">
