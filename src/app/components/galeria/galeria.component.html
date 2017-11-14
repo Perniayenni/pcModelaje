@@ -41,7 +41,21 @@
         </div>
         <div class="contenImgs">
           <div class="col-md-12">
-            <div class="card-columns">
+            <ul>
+              <li *ngFor="let img of datos.fotos let i = index" class="liI">
+                <div class="contentImg">
+                  <div *ngIf="img.isVisible" class="EliminarImg1">
+                    Haga click para Eliminar Imagen
+                  </div>
+                  <img  [src]="img.url" class="img"
+                        (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)"
+                        (mouseover)="img.isVisible=true"
+                        (mouseout)="img.isVisible=false" >
+                </div>
+
+              </li>
+            </ul>
+          <!--  <div class="card-columns">
               <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
                 <div *ngIf="img.isVisible" class="EliminarImg1">
                  Haga click para Eliminar Imagen
@@ -51,7 +65,7 @@
                       (mouseover)="img.isVisible=true"
                       (mouseout)="img.isVisible=false" >
               </div>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>
@@ -158,7 +172,7 @@
       <button type="button" class="close" (click)="ModalAddImg=!ModalAddImg" aria-label="Close" *ngIf="!loadingM">
         <span aria-hidden="true">&times;</span>
       </button>
-      <div class="modal-body" *ngIf="!loadingM">
+      <div class="modal-body" >
         <div class="row">
           <div class="col-md-5">
             SELECCIONE LAS IMAGENES

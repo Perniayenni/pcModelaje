@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from './services/login.service';
 
 
 @Component({
@@ -9,5 +10,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'app';
 
+  constructor(public auth: LoginService){
+    this.auth.cargarStorage();
+  }
 
 }

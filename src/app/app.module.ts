@@ -12,6 +12,8 @@ import { NgDropFilesDirective } from './directives/ng-drop-files.directive';
 import { GaleriaComponent } from './components/galeria/galeria.component';
 import { DestacadosComponent } from './components/destacados/destacados.component';
 import { ModelosComponent } from './components/modelos/modelos.component';
+import { HomeComponent } from './components/home/home.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 // rutas
 import { app_routing } from './app.routes';
@@ -20,8 +22,8 @@ import { app_routing } from './app.routes';
 import { CargarImagenesService } from './services/cargar-imagenes.service';
 import { DestacadosService } from './services/destacados.service';
 import {  ModelosService } from './services/modelos.service';
+import { LoginService } from './services/login.service';
 import {AngularFontAwesomeModule} from 'angular-font-awesome';
-
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
     NgDropFilesDirective,
     GaleriaComponent,
     DestacadosComponent,
-    ModelosComponent
+    ModelosComponent,
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import {AngularFontAwesomeModule} from 'angular-font-awesome';
   providers: [
     CargarImagenesService,
     DestacadosService,
-    ModelosService
+    ModelosService,
+    LoginService
   ],
   bootstrap: [AppComponent]
 })

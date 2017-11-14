@@ -137,7 +137,7 @@ export class GaleriaComponent  {
     this.ModalAddImg = true;
   }
 
-  cargarMasImagenes(){
+  cargarMasImagenes() {
     this.loadingM = true;
     this.permiteCargar = false;
     this._cargaImagenes.guardarMasImg( this.id_gAddImg, this.tituloAddImg, this.archivos)

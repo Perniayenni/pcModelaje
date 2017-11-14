@@ -1,0 +1,14 @@
+
+.conetnlogin{
+  margin-top: 3%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 2px solid gray;
+  width: 500px;
+  height: 250px;
+  padding: 20px;
+}
+
+.LogHome{
+  position: relative;
+}

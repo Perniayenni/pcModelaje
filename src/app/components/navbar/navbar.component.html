@@ -1,0 +1,29 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand"><img src="../assets/img/logo4.png"></a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/galeria">GALERIA </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/destacados">DESTACADOS </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/modelos">MODELOS </a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" (click)="auth.SessionOff()" routerLink="/home">CERRAR SESSION</a>
+      </li>
+      <!-- <li class="nav-item" routerLinkActive="active">
+         <a class="nav-link" routerLink="/carga">Carga</a>
+       </li>
+       -->
+    </ul>
+
+  </div>
+</nav>
