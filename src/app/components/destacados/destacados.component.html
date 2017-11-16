@@ -67,7 +67,7 @@
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
           SELECCIONE UNA IMG
-            <input type="file" (change)="fileEvent($event)" class="inputFile">
+            <input type="file" (change)="fileEvent($event)" class="">
             <form  #forma="ngForm" novalidate>
              TÍTULO  <input autocomplete="off" required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
               DESCRIPCIÓN  <textarea autocomplete="off" required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>

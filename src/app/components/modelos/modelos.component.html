@@ -14,8 +14,10 @@
 
 
 <!--PRimera vista-->
-  <div class=" container">
-    <div class="contentModelos" *ngFor="let modelo of Modelos let idxMo = index">
+<div class="container">
+<div class="row">
+<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" *ngFor="let modelo of Modelos let idxMo = index">
+    <div class="contentModelos" >
       <div class="contentEliEdi">
         <i class="fa fa-pencil-square-o cursor icosMo" aria-hidden="true" (click)="AbrirlModalEditarModelo(modelo.id_m, modelo.nombre, modelo.nivel, modelo.descripcion)"></i>
         <i class="fa fa-trash-o cursor icosMo" aria-hidden="true" (click)="AbrirModalEli(modelo.id_m, idxMo)"></i>
@@ -36,9 +38,10 @@
       <div class="contentDescripcionModelo">
         {{modelo.descripcion}}
       </div>
-
-    </div>
   </div>
+</div>
+</div>
+</div>
 
 <!--Modal de addModelos-->
 <div *ngIf="Modal" class="modal bd-example-modal-lg" >
