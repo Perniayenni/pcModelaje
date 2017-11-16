@@ -55,15 +55,16 @@
                </li>
              </ul>-->
 
-              <div  class="contentImg" *ngFor="let img of datos.fotos let i = index">
+            <div class="contentImg" *ngFor="let img of datos.fotos let i = index">
+              <div class="recent-work-wrap">
                 <span>
                  Click para Eliminar Imagen
                 </span>
-                <img  [src]="img.url" class="img"
+                <img  [src]="img.url" class="img-fluid"
                       (click)="AbrirModalEliminar(img.id_img, 'img', ig, i)">
               </div>
-
-        </div>
+            </div>
+          </div>
       </div>
     </div>
   </div>

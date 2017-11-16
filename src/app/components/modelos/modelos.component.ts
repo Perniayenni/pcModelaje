@@ -25,8 +25,12 @@ export class ModelosComponent implements OnInit {
   loadingM:boolean = false;
 
   Nivel = [
-    'Joven',
-    'Adulto'
+    'Capullitos',
+    'Principiantes',
+    'Infantil',
+    'Juventil',
+    'Avanzadas',
+    'Profesionales'
   ];
   nivel:string;
   nombre: string;

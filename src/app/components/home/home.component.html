@@ -5,8 +5,8 @@
 <img src="../assets/img/logo3.png" class="LogHome">
 <div class="conetnlogin">
   <form  #forma="ngForm" novalidate>
-    USUARIO <input required class="form-control" type="text" [(ngModel)]="usuario" name="usuario">
-    CONTRASEÑA <input required class="form-control" type="password" [(ngModel)]="contrasena" name="contrasena">
+    USUARIO <input autocomplete="off" required class="form-control" type="text" [(ngModel)]="usuario" name="usuario">
+    CONTRASEÑA <input autocomplete="off" required class="form-control" type="password" [(ngModel)]="contrasena" name="contrasena">
     <br>
     <button [disabled]="!forma.valid" type="button" class="btn btn-block btnRojo" (click)="obtenerUsuario()">Enviar</button>
   </form>

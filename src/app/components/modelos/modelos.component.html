@@ -21,9 +21,11 @@
         <i class="fa fa-trash-o cursor icosMo" aria-hidden="true" (click)="AbrirModalEli(modelo.id_m, idxMo)"></i>
       </div>
       <div class="ContentImgModelos"  *ngFor="let img of modelo.fotos let i = index">
-        <span>Click para Eliminar Imagen</span>
-        <img (click)="AbrirlModalEditarImgMod(modelo.id_m, img.id_img)"
-             class="card-img-top" [src]="img.url" [alt]="modelo.nombre">
+        <div class="recent-work-wrap">
+          <span>Click para Eliminar Imagen</span>
+          <img (click)="AbrirlModalEditarImgMod(modelo.id_m, img.id_img)"
+               class="img-fluid" [src]="img.url" [alt]="modelo.nombre">
+        </div>
       </div>
       <div class="contentNombreModelo">
         {{ modelo.nombre }}
@@ -56,7 +58,7 @@
             <input type="file" (change)="fileEvent($event)" class="form-control-file">
             <!--<input type="file" class="form-control-file" [(ngModel)]="archivo">-->
             <form  #forma="ngForm" novalidate>
-             NOMBRE  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+             NOMBRE  <input autocomplete="off" required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
              NIVEL
               <select  required style="width: 100%"
                        class="custom-select" [(ngModel)]="nivel"
@@ -66,7 +68,7 @@
                         [value]="nvel">
                   {{nvel}}</option>
               </select>
-              DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              DESCRIPCIÓN  <textarea autocomplete="off" required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
               <br>
               <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "
