@@ -75,7 +75,9 @@ export class DestacadosService {
       'Content-Type': 'application/json'
     });
 
-    return this.http.put( this.EditImgDestacados, body, { headers })
+    let url = this.urlDestacados + '/' + id;
+
+    return this.http.put( url, body, { headers })
       .map( res => {
         return res.json();
       });
