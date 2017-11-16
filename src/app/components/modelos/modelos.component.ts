@@ -28,7 +28,7 @@ export class ModelosComponent implements OnInit {
     'Capullitos',
     'Principiantes',
     'Infantil',
-    'Juventil',
+    'Juvenil',
     'Avanzadas',
     'Profesionales'
   ];
