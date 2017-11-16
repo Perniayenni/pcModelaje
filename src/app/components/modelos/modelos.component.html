@@ -113,7 +113,7 @@
         <div class="row">
           <div class="col-md-12" style="margin-bottom:40px">
             <form  #forma="ngForm" novalidate>
-              NOMBRE COMPLETO  <input required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
+              NOMBRE COMPLETO  <input autocomplete="off" required  name="titulo" [(ngModel)]="nombre" type="text" class="form-control">
               NIVEL
               <select  required style="width: 100%"
                        class="custom-select" [(ngModel)]="nivel"
@@ -124,7 +124,7 @@
                   {{nvel}}</option>
               </select>
 
-              DESCRIPCION  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              DESCRIPCION  <textarea autocomplete="off" required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
               <br>
               <button type="button" class="btn btnRojo btn-block"
                       [disabled]="!forma.valid "

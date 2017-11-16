@@ -3,6 +3,10 @@ body{
   font-family: Arial;
 }
 
+textarea {
+  resize: none;
+}
+
 .main-container{
   margin-top: 40px;
 }
@@ -298,3 +302,4 @@ body{
 .recent-work-wrap:hover span{
   display: block;
 }
+

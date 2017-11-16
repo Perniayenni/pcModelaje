@@ -114,8 +114,8 @@
             </div>
             <div class="col-md-7" style="margin-bottom:40px">
               <form  #forma="ngForm" novalidate>
-              TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-              DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+              TÍTULO  <input autocomplete="off" required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+              DESCRIPCIÓN  <textarea autocomplete="off" required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
 
                 <div>CARGAR IMAGENES</div>
 
@@ -240,8 +240,8 @@
           <div class="row">
             <div class="col-md-12">
               <form  #forma="ngForm" novalidate>
-               TÍTULO  <input required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
-               DESCRIPCIÓN  <textarea required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
+               TÍTULO  <input autocomplete="off" required  name="titulo" [(ngModel)]="titulo" type="text" class="form-control">
+               DESCRIPCIÓN  <textarea autocomplete="off" required name="descrpcion" [(ngModel)]="descripcion" class="form-control"></textarea>
                 <br>
                 <button type="button" class="btn btnRojo btn-block"
                         (click)="EditarEvento()"
