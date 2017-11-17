@@ -303,3 +303,20 @@ textarea {
   display: block;
 }
 
+.VeriIco{
+  display: none;
+}
+
+.verBoton{
+  display: block;
+}
+
+@media (max-width: 997px) {
+  .VeriIco{
+    display: block;
+  }
+
+  .verBoton{
+    display: none;
+  }
+}

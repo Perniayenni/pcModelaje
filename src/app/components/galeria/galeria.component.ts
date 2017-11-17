@@ -232,6 +232,7 @@ export class GaleriaComponent  {
           this.sms = 'Evento editado';
           this.ColorAlert = 'alert-success';
           this.mostrarAlert = true;
+          this.limpiarDatos();
           this.cargarGaleria();
           setTimeout( () => this.mostrarAlert = false, 4000);
         }

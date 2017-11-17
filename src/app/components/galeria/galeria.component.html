@@ -22,21 +22,30 @@
         <div class="contenTitulo ">
           <div class="titulo"><h3>{{ datos.titulo }}</h3></div>
           <div class="boton">
-            <!--    <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
+            <div class="VeriIco">
+              <i class="fa fa-pencil-square-o cursor icosDes" aria-hidden="true"
                  (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)"></i>
               <i class="fa fa-trash-o cursor icosDes" aria-hidden="true"
-                 (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)"></i>-->
+                 (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)"></i>
+            </div>
 
-            <button type="button" class="btn btnNEgro" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
+            <div class="verBoton">
+              <button type="button" class="btn btnNEgro" (click)="AbrirModalEditarEvento(datos.id_g, datos.titulo, datos.descripcion)">Editar Evento</button>
               <button type="button" class="btn btnNEgro" (click)="AbrirModalEliminar(datos.id_g, 'evento', ig, 0)">Eliminar Evento</button>
+            </div>
+
           </div>
         </div>
 
         <div class="contentDescrip">
           <div class="titulo">{{datos.descripcion}}</div>
           <div class="boton">
-            <!-- <i class="fa fa-plus cursor icosDes" aria-hidden="true" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)"></i>-->
-             <button type="button" class="btn btnRojo" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>
+            <div class="VeriIco">
+              <i class="fa fa-plus cursor icosDes" aria-hidden="true" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)"></i>
+            </div>
+            <div class="verBoton">
+              <button type="button" class="btn btnRojo" (click)="AbrirModalAddImg(datos.titulo, datos.id_g)">Agregar más Imagenes</button>
+            </div>
           </div>
         </div>
         <div class="contenImgs">

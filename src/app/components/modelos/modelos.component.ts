@@ -161,6 +161,7 @@ export class ModelosComponent implements OnInit {
           this.loadingM= false;
           this.ModalAEditMod = false;
           this.sms = 'Modelo editada';
+          this.limpiarDatos();
           this.ColorAlert = 'alert-success';
           this.mostrarAlert = true;
           this.obtenerModelos();
@@ -168,6 +169,7 @@ export class ModelosComponent implements OnInit {
         }else{
           this.ModalAEditMod = false;
           this.loadingM= false;
+          this.limpiarDatos();
           this.sms = 'Ocurrio un error porfavor intente mas tarde';
           this.ColorAlert = 'alert-danger';
           this.mostrarAlert = true;

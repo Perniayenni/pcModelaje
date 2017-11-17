@@ -154,9 +154,11 @@ export class DestacadosComponent implements OnInit {
           this.sms = 'Evento editado';
           this.ColorAlert = 'alert-success';
           this.mostrarAlert = true;
+          this.limpiarDatos();
           this.ObtenerDestacados();
           setTimeout( () => this.mostrarAlert = false, 4000);
         }else{
+          this.limpiarDatos();
           this.loadingM = false;
           this.ModalAEditDest = false;
           this.sms = 'Ocurrio un error porfavor intente mas tarde';
